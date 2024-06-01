@@ -3,8 +3,7 @@
 import json
 import mysql.connector
 # 建立與 MySQL 資料庫的連接
-#Elastic IP
-cnx = mysql.connector.connect(user='root', password='abc123456', host='35.95.173.135', port=3306, database='taipei_attraction', autocommit=False)
+cnx = mysql.connector.connect(user='root', password='abc123456', host='127.0.0.1', port=3306, database='taipei_attraction', autocommit=False)
 cursor = cnx.cursor()
 # 讀取 JSON 檔案
 with open('data/taipei-attractions.json', 'r', encoding='utf-8') as file:
