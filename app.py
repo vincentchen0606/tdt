@@ -46,7 +46,7 @@ async def get_mrts():
     try:
         # 連接資料庫
         db = connect(
-            host="127.0.0.1",
+            host="35.95.173.135", #Elastic IP
             user="root",
             password="abc123456",
             database="taipei_attraction"
