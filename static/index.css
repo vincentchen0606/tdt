@@ -461,7 +461,8 @@
     /* main and .main不一樣 */
     display: flex;
     justify-content: center;
-    padding: 25px 0 0 0;
+    padding: 20px 0 20px 0; /*上下平均*/
+    align-items: center;
   }
   .left_arrow,
   .right_arrow {
