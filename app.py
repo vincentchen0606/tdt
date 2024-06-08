@@ -1,10 +1,12 @@
 from fastapi import *
 from fastapi.responses import FileResponse, JSONResponse
-
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, HTTPException
 from mysql.connector import connect
 from pydantic import BaseModel
 from typing import List, Optional
+#for static file
+from fastapi.staticfiles import StaticFiles
 class ErrorResponse(BaseModel):
     error: bool = True
     message: str
@@ -15,7 +17,7 @@ class Attraction(BaseModel):
     description: str
     address: str
     transport: str
-    mrt: str
+    mrt: Optional[str]  # 允許 mrt 為 Null
     lat: float
     lng: float
     images: List[str]
@@ -24,7 +26,8 @@ class AttractionsResponse(BaseModel):
 	data: List[Attraction]
 	nextPage: Optional[int]
 app=FastAPI()
-
+# 註冊靜態文件，讓程式可以從static檔案偵測到CSS檔
+app.mount("/static", StaticFiles(directory="static"), name="static")
 #connect to MySQL
 
 #MRT station
