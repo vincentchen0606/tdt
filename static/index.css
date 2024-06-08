@@ -369,6 +369,9 @@
     font-size: 30px;
     color: #448899;
   }
+  .nav_h2::-webkit-scrollbar {
+    display: none;
+  }
   .button_container {
     display: flex;
     margin-left: auto;
