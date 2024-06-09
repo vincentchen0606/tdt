@@ -1,0 +1,970 @@
+* {
+  /* debug用　使用完刪除 */
+  /* outline: 1px red solid; */
+  font-family: Noto Sans TC;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1200px) and (max-width: 1920px) {
+  #welcome {
+    position: relative;
+    width: 100vw;
+  }
+  .welcome {
+    position: relative;
+    padding-top: 74px; /*避免被navigation擋住*/
+  }
+  .welcome img {
+    width: 100vw;
+    height: 320px;
+    object-fit: cover;
+    background-size: contain;
+    object-position: center top; /* 將圖片的頂部對齊容器的頂部 */
+  }
+
+  .slogan {
+    position: absolute;
+    top: 62%; /*手動調*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /*讓內部元素垂直排列*/
+    align-items: flex-start; /*讓內部元素靠左對齊*/
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    padding: 10px 0;
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 1200px;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .slogan h1,
+  .slogan p,
+  .slogan input,
+  .slogan button {
+    margin-bottom: 10px;
+  }
+  .slogan h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .slogan p {
+    font-size: 16px;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  .custom-input {
+    width: 400px;
+    height: 46px;
+    border-top-left-radius: 5px; /* 左上導圓角 */
+    border-bottom-left-radius: 5px; /* 左下導圓角 */
+    border: none;
+    padding-left: 10px; /* 輸入景點名稱查詢的位置調整 */
+  }
+  .custom-input::placeholder {
+    color: #757575;
+    font-weight: 700;
+    font-size: 16px;
+    left: 50px;
+  }
+  input:focus {
+    outline: none; /* 移除input元素在輸入時的邊框 */
+  }
+  .search-bar-btn {
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    border: none;
+    border-top-right-radius: 5px; /* 右上導圓角 */
+    border-bottom-right-radius: 5px; /* 右下導圓角 */
+    background-image: url(/static/icon/icon_search.png); /*按鈕放置image*/
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .slogan {
+    position: absolute;
+    width: 1200px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+  }
+  main {
+    top: -320px;
+  }
+  .main {
+    /* main and .main不一樣 */
+    display: flex;
+    justify-content: center;
+    padding: 25px 0 0 0;
+  }
+  .left_arrow,
+  .right_arrow {
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: cover; /*確保圖片能夠完全覆蓋按鈕區域並保持縱橫比。*/
+    position: absolute;
+  }
+  .left_arrow_container {
+    left: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .right_arrow_container {
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .left_arrow {
+    left: 0px;
+    background-image: url("/static/icon/Default_left.png");
+  }
+  .left_arrow:hover {
+    left: 0px;
+    background-image: url("/static/icon/Hovered\ _left.png");
+  }
+  .right_arrow {
+    background-image: url("/static/icon/Default_right.png");
+  }
+  .right_arrow:hover {
+    background-image: url("/static/icon/Hovered_right.png");
+  }
+  /*list mrts  */
+  .list-bar {
+    width: 1200px;
+    height: 70px;
+    gap: 0px;
+    opacity: 1;
+  }
+  .carousel-container {
+    /* width: Fill (1, 106px) px;
+    height: Fixed (50px) px;
+    padding: 13px 10px 13px 10px; */
+    width: 1200px;
+    /* overflow: hidden; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    align-items: center; /*內部元素居中*/
+  }
+  .station-info {
+    /* width: 62px;
+    height: 24px; */
+    padding: 5px 0px 5px 0px;
+    gap: 4px;
+    /* flex-grow: 1; 防止內容溢出 */
+    display: inline-block; /*將 .station-list 設置為行內塊級元素*/
+    white-space: nowrap; /* 防止換行 */
+    display: flex; /*水平滾動？*/
+    /*overflow-x: auto; 水平滾動條？*/
+    padding-left: 38px; /* 調整左邊的 padding 值,留出箭頭的空間 */
+    padding-right: 38px; /* 調整右邊的 padding 值,留出箭頭的空間 */
+    justify-content: flex-start; /* 讓內容左對齊 */
+  }
+  .station-list {
+    /* width: 62px; */
+    height: 24px;
+    font-size: 16px;
+    color: #666666;
+    margin-right: 10px; /* 添加一些間距 */
+    display: inline-block;
+    flex-shrink: 0; /*不要壓縮　預設是1是預防爆版*/
+    cursor: pointer;
+  }
+  .station-list:hover {
+    color: #000000; /* 滑鼠移過時的文字顏色 */
+    cursor: pointer;
+  }
+  /* attraction */
+  .attractions {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr); /* 4 列,每列佔 1fr(分數單位) */
+    gap: 30px; /*the same as grid-gap*/
+    box-sizing: border-box;
+    margin: auto;
+    margin-bottom: 40px;
+    padding: 15px;
+    object-fit: contain;
+  }
+  .attractions-img {
+    position: relative;
+    height: 197px;
+    overflow: hidden; /*避免scroll bar*/
+    object-fit: cover;
+  }
+  .attractions-img img {
+    height: 197px;
+    width: 270px;
+    object-fit: cover;
+  }
+  .attractions-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid; /*邊框*/
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+  }
+  .name-banner {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 270px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明灰色背景 */
+    color: white;
+    padding: 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    display: flex; /*content置中*/
+    align-items: center;
+    white-space: nowrap; /*防止name換行*/
+  }
+  .name-banner .name {
+    text-indent: 10px; /* 純文字向右縮進 10px不影響div */
+    text-overflow: ellipsis; /*太長的name...*/
+  }
+  .info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    height: 45px;
+    align-items: center;
+    background-color: white;
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+
+  .info-container .category {
+    color: #757575;
+  }
+  .info-container .mrt {
+    color: #757575;
+  }
+  .footer {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 750px) {
+  #welcome {
+    position: relative;
+    width: 100vw;
+  }
+  .welcome {
+    position: relative;
+    padding-top: 54px; /*避免被navigation擋住*/
+  }
+  .welcome img {
+    width: 100vw;
+    height: 320px;
+    object-fit: cover;
+    background-size: contain;
+    object-position: center top; /* 將圖片的頂部對齊容器的頂部 */
+  }
+
+  .slogan {
+    position: absolute;
+    top: 62%; /*手動調*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /*讓內部元素垂直排列*/
+    align-items: flex-start; /*讓內部元素靠左對齊*/
+  }
+  .navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    left: 10px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    right: 0px;
+
+    height: 34px;
+    width: 175px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .slogan {
+    position: relative;
+    /* top: 220px; */
+  }
+  .slogan h1,
+  .slogan p,
+  .slogan input,
+  .slogan button {
+    margin-bottom: 10px;
+  }
+  .slogan h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .slogan p {
+    font-size: 16px;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .custom-input {
+    width: 285px;
+    height: 46px;
+    border-top-left-radius: 5px; /* 左上導圓角 */
+    border-bottom-left-radius: 5px; /* 左下導圓角 */
+    border: none;
+    padding-left: 10px; /* 輸入景點名稱查詢的位置調整 */
+  }
+  .custom-input::placeholder {
+    color: #757575;
+    font-weight: 700;
+    font-size: 16px;
+    left: 50px;
+  }
+  input:focus {
+    outline: none; /* 移除input元素在輸入時的邊框 */
+  }
+  .search-bar-btn {
+    position: absolute;
+    right: -1px;
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    border: none;
+    border-top-right-radius: 5px; /* 右上導圓角 */
+    border-bottom-right-radius: 5px; /* 右下導圓角 */
+    background-image: url(/static/icon/icon_search.png); /*按鈕放置image*/
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .slogan {
+    position: absolute;
+    width: 320px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    font-size: 16px;
+  }
+  main {
+    top: -320px;
+  }
+  .main {
+    /* main and .main不一樣 */
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 20px 0; /*上下平均*/
+    align-items: center;
+  }
+  .left_arrow,
+  .right_arrow {
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: cover; /*確保圖片能夠完全覆蓋按鈕區域並保持縱橫比。*/
+    position: absolute;
+  }
+  .left_arrow_container {
+    left: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .right_arrow_container {
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .left_arrow {
+    left: 0px;
+    background-image: url("/static/icon/Default_left.png");
+  }
+  .left_arrow:hover {
+    left: 0px;
+    background-image: url("/static/icon/Hovered\ _left.png");
+  }
+  .right_arrow {
+    background-image: url("/static/icon/Default_right.png");
+  }
+  .right_arrow:hover {
+    background-image: url("/static/icon/Hovered_right.png");
+  }
+  /*list mrts  */
+  .list-bar {
+    width: 100vw;
+    height: 70px;
+    gap: 0px;
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .carousel-container {
+    /* width: Fill (1, 106px) px;
+        height: Fixed (50px) px;
+        padding: 13px 10px 13px 10px; */
+    width: 90vw;
+    /* overflow: hidden; */
+    position: relative;
+    display: flex;
+    /* justify-items: center; */
+    overflow: hidden;
+    align-items: center; /*內部元素居中*/
+  }
+  .station-info {
+    /* width: 62px;
+        height: 24px; */
+    padding: 5px 0px 5px 0px;
+    gap: 4px;
+    /* flex-grow: 1; 防止內容溢出 */
+    display: inline-block; /*將 .station-list 設置為行內塊級元素*/
+    white-space: nowrap; /* 防止換行 */
+    display: flex; /*水平滾動？*/
+    /*overflow-x: auto; 水平滾動條？*/
+    padding-left: 38px; /* 調整左邊的 padding 值,留出箭頭的空間 */
+    padding-right: 38px; /* 調整右邊的 padding 值,留出箭頭的空間 */
+    justify-content: flex-start; /* 讓內容左對齊 */
+  }
+  .station-list {
+    /* width: 62px; */
+    height: 24px;
+    font-size: 16px;
+    color: #666666;
+    margin-right: 7px; /* 添加一些間距 */
+    margin-left: 7px; /* 添加一些間距 */
+    display: inline-block;
+    flex-shrink: 0; /*不要壓縮　預設是1是預防爆版*/
+    cursor: pointer;
+  }
+  .station-list:hover {
+    color: #000000; /* 滑鼠移過時的文字顏色 */
+    cursor: pointer;
+  }
+  /* attraction */
+  .attractions {
+    display: grid;
+    max-width: 322px;
+    grid-template-columns: repeat(1, 1fr); /* 1 列,每列佔 1fr(分數單位) */
+    gap: 30px; /*the same as grid-gap*/
+    box-sizing: border-box;
+    margin: auto;
+    margin-bottom: 40px;
+    /* padding: 15px; */
+    object-fit: contain;
+  }
+  .attractions-img {
+    position: relative;
+    height: 235px;
+    width: 322px;
+    overflow: hidden; /*避免scroll bar*/
+    object-fit: cover;
+  }
+  .attractions-img img {
+    height: 235px;
+    width: 322px;
+    object-fit: cover;
+  }
+  .attractions-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid; /*邊框*/
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+  .name-banner {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 322px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明灰色背景 */
+    color: white;
+    padding: 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    display: flex; /*content置中*/
+    align-items: center;
+    white-space: nowrap; /*防止name換行*/
+  }
+  .name-banner .name {
+    text-indent: 10px; /* 純文字向右縮進 10px不影響div */
+    text-overflow: ellipsis; /*太長的name...*/
+  }
+  .info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 322px;
+    height: 45px;
+    align-items: center;
+    background-color: white;
+    box-sizing: border-box;
+    color: #757575;
+  }
+  .category {
+    margin-left: 10px;
+  }
+  .mrt {
+    margin-right: 10px;
+  }
+
+  .footer {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1199px) {
+  #welcome {
+    position: relative;
+    width: 100vw;
+  }
+  .welcome {
+    position: relative;
+    padding-top: 54px; /*避免被navigation擋住*/
+  }
+  .welcome img {
+    width: 100vw;
+    height: 320px;
+    object-fit: cover;
+    background-size: contain;
+    object-position: center top; /* 將圖片的頂部對齊容器的頂部 */
+  }
+
+  .slogan {
+    /* position: absolute; */
+    top: 62%; /*手動調*/
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /*讓內部元素垂直排列*/
+    align-items: flex-start; /*讓內部元素靠左對齊*/
+    position: relative;
+    /* top: 220px; */
+  }
+  .navigation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    left: 10px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    right: 0px;
+
+    height: 34px;
+    width: 175px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .slogan {
+  }
+  .slogan h1,
+  .slogan p,
+  .slogan input,
+  .slogan button {
+    margin-bottom: 10px;
+  }
+  .slogan h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .slogan p {
+    font-size: 16px;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .custom-input {
+    width: 285px;
+    height: 46px;
+    border-top-left-radius: 5px; /* 左上導圓角 */
+    border-bottom-left-radius: 5px; /* 左下導圓角 */
+    border: none;
+    padding-left: 10px; /* 輸入景點名稱查詢的位置調整 */
+  }
+  .custom-input::placeholder {
+    color: #757575;
+    font-weight: 700;
+    font-size: 16px;
+    left: 50px;
+  }
+  input:focus {
+    outline: none; /* 移除input元素在輸入時的邊框 */
+  }
+  .search-bar-btn {
+    position: absolute;
+    right: -1px;
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    border: none;
+    border-top-right-radius: 5px; /* 右上導圓角 */
+    border-bottom-right-radius: 5px; /* 右下導圓角 */
+    background-image: url(/static/icon/icon_search.png); /*按鈕放置image*/
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .slogan {
+    position: absolute;
+    width: 320px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    font-size: 16px;
+  }
+  main {
+    top: -320px;
+  }
+  .main {
+    /* main and .main不一樣 */
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 20px 0; /*上下平均*/
+    align-items: center;
+  }
+  .left_arrow,
+  .right_arrow {
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: cover; /*確保圖片能夠完全覆蓋按鈕區域並保持縱橫比。*/
+    position: absolute;
+  }
+  .left_arrow_container {
+    left: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .right_arrow_container {
+    right: 0px;
+    width: 32px;
+    height: 32px;
+    z-index: 200;
+    position: absolute;
+    background-color: white; /*避免arrow img透明看到底字*/
+  }
+  .left_arrow {
+    left: 0px;
+    background-image: url("/static/icon/Default_left.png");
+  }
+  .left_arrow:hover {
+    left: 0px;
+    background-image: url("/static/icon/Hovered\ _left.png");
+  }
+  .right_arrow {
+    background-image: url("/static/icon/Default_right.png");
+  }
+  .right_arrow:hover {
+    background-image: url("/static/icon/Hovered_right.png");
+  }
+  /*list mrts  */
+  .list-bar {
+    width: 100vw;
+    height: 70px;
+    gap: 0px;
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .carousel-container {
+    /* width: Fill (1, 106px) px;
+            height: Fixed (50px) px;
+            padding: 13px 10px 13px 10px; */
+    width: 95vw;
+    /* overflow: hidden; */
+    position: relative;
+    display: flex;
+    /* justify-items: center; */
+    overflow: hidden;
+    align-items: center; /*內部元素居中*/
+  }
+  .station-info {
+    /* width: 62px;
+            height: 24px; */
+    padding: 5px 0px 5px 0px;
+    gap: 4px;
+    /* flex-grow: 1; 防止內容溢出 */
+    display: inline-block; /*將 .station-list 設置為行內塊級元素*/
+    white-space: nowrap; /* 防止換行 */
+    display: flex; /*水平滾動？*/
+    /*overflow-x: auto; 水平滾動條？*/
+    padding-left: 38px; /* 調整左邊的 padding 值,留出箭頭的空間 */
+    padding-right: 38px; /* 調整右邊的 padding 值,留出箭頭的空間 */
+    justify-content: flex-start; /* 讓內容左對齊 */
+  }
+  .station-list {
+    /* width: 62px; */
+    height: 24px;
+    font-size: 16px;
+    color: #666666;
+    margin-right: 7px; /* 添加一些間距 */
+    margin-left: 7px; /* 添加一些間距 */
+    display: inline-block;
+    flex-shrink: 0; /*不要壓縮　預設是1是預防爆版*/
+    cursor: pointer;
+  }
+  .station-list:hover {
+    color: #000000; /* 滑鼠移過時的文字顏色 */
+    cursor: pointer;
+  }
+  /* attraction */
+  .attractions {
+    display: grid;
+    max-width: 644px;
+    grid-template-columns: repeat(2, 1fr); /* 2 列,每列佔 1fr(分數單位) */
+    gap: 30px; /*the same as grid-gap*/
+    box-sizing: border-box;
+    margin: auto;
+    margin-bottom: 40px;
+    /* padding: 15px; */
+    object-fit: contain;
+  }
+  .attractions-img {
+    position: relative;
+    height: 235px;
+    width: 322px;
+    overflow: hidden; /*避免scroll bar*/
+    object-fit: cover;
+  }
+  .attractions-img img {
+    height: 235px;
+    width: 322px;
+    object-fit: cover;
+  }
+  .attractions-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid; /*邊框*/
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+  .name-banner {
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    width: 322px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明灰色背景 */
+    color: white;
+    padding: 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    display: flex; /*content置中*/
+    align-items: center;
+    white-space: nowrap; /*防止name換行*/
+  }
+  .name-banner .name {
+    text-indent: 10px; /* 純文字向右縮進 10px不影響div */
+    text-overflow: ellipsis; /*太長的name...*/
+  }
+  .info-container {
+    display: flex;
+    justify-content: space-between;
+    width: 322px;
+    height: 45px;
+    align-items: center;
+    background-color: white;
+    box-sizing: border-box;
+    color: #757575;
+  }
+  .category {
+    margin-left: 10px;
+  }
+  .mrt {
+    margin-right: 10px;
+  }
+
+  .footer {
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}

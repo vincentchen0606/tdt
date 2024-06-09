@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Index</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>臺北一日遊Home Page</title>
+    <link rel="stylesheet" href="/static/index.css" />
+    <script src="/static/js/index.js"></script>
+  </head>
+  <body>
+    <div class="navigation" id="navigation">
+      <div class="nav_bar">
+        <h2 class="nav_h2">台北一日遊</h2>
+        <div class="button_container">
+          <button>預定行程</button><button>登入/註冊</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="welcome" id="welcome">
+      <img src="/static/images/welcome.png" alt="" />
+      <div class="slogan">
+        <h1>輕鬆享受台北一日悠閒</h1>
+        <p>探索每個角落，體驗城市的深度旅遊行程</p>
+        <div class="search-bar">
+          <input
+            class="custom-input"
+            type="text"
+            placeholder="輸入景點名稱查詢"
+          />
+          <button class="search-bar-btn"></button>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div class="main">
+        <div class="list-bar">
+          <div class="carousel-container">
+            <div class="left_arrow_container">
+              <div class="left_arrow"></div>
+            </div>
+            <div class="station-info">
+              <div class="station-list"></div>
+            </div>
+            <div class="right_arrow_container">
+              <div class="right_arrow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="attractions">
+        <template id="attraction-template">
+          <div class="attractions-item">
+            <div class="attractions-img">
+              <img src="" alt="attractions" />
+              <div class="name-banner">
+                <p class="name"></p>
+              </div>
+            </div>
+            <div class="info-container">
+              <p class="category"></p>
+              <p class="mrt"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </main>
+    <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
+  </body>
 </html>
