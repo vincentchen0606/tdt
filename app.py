@@ -10,7 +10,8 @@ from fastapi.staticfiles import StaticFiles
 class ErrorResponse(BaseModel):
     error: bool = True
     message: str
-class Attraction(BaseModel):
+# fastapi參數驗證
+class Attraction(BaseModel): 
     id: int
     name: str
     category: str

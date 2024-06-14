@@ -1,11 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attraction</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attraction</title>
+    <link rel="stylesheet" href="/static/attraction.css" />
+  </head>
+  <body>
+    <main class="main">
+      <div class="navigation" id="navigation">
+        <div class="nav_bar">
+          <a href="http://127.0.0.1:8000/" style="text-decoration: none"
+            ><h2 class="nav_h2">台北一日遊</h2></a
+          >
+          <div class="button_container">
+            <button>預定行程</button><button>登入/註冊</button>
+          </div>
+        </div>
+      </div>
+      <hr class="navigation-divider" />
+
+      <section class="section">
+        <div class="section_picture_current">
+          <!-- <img src="" alt="" /> -->
+          <div class="picture_current_arrow">
+            <div class="picture_current_left_arrow"></div>
+            <div class="picture_current_right_arrow"></div>
+          </div>
+          <ul class="point-group">
+            <!-- <li></li>
+            <li class="point"></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+          </ul>
+        </div>
+        <div class="section_profile">
+          <h3 class="section_profile_name">平安鐘</h3>
+          <div class="section_profile_info">
+            <div class="section_profile_category">公共藝術</div>
+            <div class="at">at</div>
+            <div class="section_profile_mrt">忠孝復興</div>
+          </div>
+          <div class="booking_form">
+            <div class="booking_form_content">
+              <div class="booking_form_title">訂購導覽行程</div>
+              <div>以此景點為中心的一日行程，帶您探索城市角落故事</div>
+              <div>
+                <span class="booking_form_title">選擇日期：</span>
+                <input type="date" id="myDate" name="myDate" />
+              </div>
+              <div class="booking_form_time">
+                <span class="booking_form_title">選擇時間：</span>
+                <label class="radio-label" for="forenoon">
+                  <input
+                    type="radio"
+                    name="radio_date"
+                    value="2000"
+                    class="radio_button"
+                    id="forenoon"
+                    required
+                    checked
+                  />
+                  <span class="radio_text">上半天</span>
+                </label>
+                <label class="radio-label" for="afternoon">
+                  <input
+                    type="radio"
+                    name="radio_date"
+                    value="2500"
+                    class="radio_button"
+                    id="afternoon"
+                  />
+                  <span class="radio_text">下半天</span>
+                </label>
+              </div>
+              <div>
+                <span class="booking_form_title">導覽費用：</span>
+                <span class="price">新台幣2000元</span>
+              </div>
+              <button class="booking_form_btn">開始預約行程</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+
+      <div class="infors">
+        <div class="description">
+          平安鐘祈求大家的平安，這是為了紀念921地震週年的設計，在喧鬧的廣場上每個小時鳴鐘，保佑平安，祈禱臺灣不會再發生這樣的天災。雙手合十加上108個黃色的琉璃乳丁，隨著緩緩流下的水，在底下的一個小噴泉噴出。雙手合十的意義，一個是祈福，一個是包容，教我們要包容這樣的改變，撫平這樣的傷口。下面的水緩緩流出，代表著人的生命力是不斷地延續下去。緩緩地鐘聲，卻帶來心中的寧靜。
+          這個平安鐘是由建築師姚仁喜與琉璃創作家王俠軍共同設計，長6公尺、寬5公尺，以鑄銅製成，由法鼓山文教基金會全額出資。平安鐘點綴都市景觀，不時提醒大家，面對刻骨銘心的災難痛苦，更應該有謙卑的一顆心。
+        </div>
+        <div class="address">景點地址：</div>
+        <div class="address-content">臺北市 大安區忠孝東路4段</div>
+        <div class="transport">交通方式：</div>
+        <div class="transport-content">
+          捷運站名：忠孝復興站4號出口1.公車：204、212、212直、232、232副、262、262(區間)、278、299、521、605、605(副)、605(新台五線)、667、903、忠孝新幹線至頂好市場站
+          2.車位：太平洋崇光百貨地下停車場或市民大道附近地下停車場
+        </div>
+      </div>
+    </main>
+    <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
+    <script src="/static/js/attraction.js"></script>
+  </body>
 </html>

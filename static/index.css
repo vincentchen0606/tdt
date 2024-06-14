@@ -14,7 +14,7 @@
   }
   .welcome {
     position: relative;
-    padding-top: 74px; /*避免被navigation擋住*/
+    padding-top: 64px; /*避免被navigation擋住*/
   }
   .welcome img {
     width: 100vw;
@@ -42,7 +42,7 @@
     justify-content: center;
     width: 100vw;
     height: 54px;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     position: fixed; /* 將 position 設置為 fixed */
     top: 0; /* 將navigation固定在頂部 */
     background-color: white; /* 確保navigation不被其他元素遮擋 */
@@ -266,6 +266,10 @@
     border-radius: 5px;
     border: 1px solid #e8e8e8;
   }
+  /* 移除href造成的底線 */
+  a:-webkit-any-link {
+    text-decoration: none;
+  }
   .name-banner {
     position: absolute;
     bottom: 0;
@@ -294,6 +298,7 @@
     background-color: white;
     box-sizing: border-box;
     color: #ffffff;
+    margin: 0 auto;
   }
 
   .info-container .category {
@@ -593,6 +598,10 @@
     border: 1px solid #e8e8e8;
     border-radius: 5px;
   }
+  /* 移除href造成的底線 */
+  a:-webkit-any-link {
+    text-decoration: none;
+  }
   .name-banner {
     position: absolute;
     bottom: 0;
@@ -730,8 +739,7 @@
     font-size: inherit;
     color: inherit;
   }
-  .slogan {
-  }
+
   .slogan h1,
   .slogan p,
   .slogan input,
@@ -920,11 +928,15 @@
     border: 1px solid #e8e8e8;
     border-radius: 5px;
   }
+  /* 移除href造成的底線 */
+  a:-webkit-any-link {
+    text-decoration: none;
+  }
   .name-banner {
     position: absolute;
     bottom: 0;
     z-index: 10;
-    width: 322px;
+    width: 307px;
     height: 40px;
     background-color: rgba(0, 0, 0, 0.5); /* 半透明灰色背景 */
     color: white;
@@ -934,6 +946,7 @@
     display: flex; /*content置中*/
     align-items: center;
     white-space: nowrap; /*防止name換行*/
+    margin-left: 8px;
   }
   .name-banner .name {
     text-indent: 10px; /* 純文字向右縮進 10px不影響div */
@@ -942,12 +955,13 @@
   .info-container {
     display: flex;
     justify-content: space-between;
-    width: 322px;
+    width: 307px;
     height: 45px;
     align-items: center;
     background-color: white;
     box-sizing: border-box;
     color: #757575;
+    margin: 0 auto;
   }
   .category {
     margin-left: 10px;

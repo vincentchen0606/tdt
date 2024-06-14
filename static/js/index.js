@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
   fetchAttractions(); //執行景點loading
   setSearchButtonListener(); //搜尋功能
   fetchMrts(); //mrts list loading
+  //點擊景點導向attraction.html
 });
 //載入景點
 let isLoading = false; // 新增標誌變量
@@ -138,7 +139,7 @@ async function fetchMrts() {
 //
 
 async function searchAttractions() {
-  if (isLoading) return; //if true表示在loading　return不執行
+  if (isLoading) return; //if true表示在loading　return不執行　避免重複觸發loading
   isLoading = true;
 
   const url = `/api/attractions?keyword=${keyword}`;
@@ -201,6 +202,9 @@ function renderAttractions(attractions) {
 
   attractions.forEach((attraction) => {
     const attractionItem = attractionTemplate.content.cloneNode(true);
+
+    const link = attractionItem.querySelector(".attraction-link");
+    link.href = `/attraction/${attraction.id}`;
 
     const img = attractionItem.querySelector(".attractions-img img");
     img.src = attraction.images[0];

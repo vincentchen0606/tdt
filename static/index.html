@@ -10,13 +10,14 @@
   <body>
     <div class="navigation" id="navigation">
       <div class="nav_bar">
-        <h2 class="nav_h2">台北一日遊</h2>
+        <a href="http://127.0.0.1:8000/" style="text-decoration: none"
+          ><h2 class="nav_h2">台北一日遊</h2></a
+        >
         <div class="button_container">
           <button>預定行程</button><button>登入/註冊</button>
         </div>
       </div>
     </div>
-
     <div class="welcome" id="welcome">
       <img src="/static/images/welcome.png" alt="" />
       <div class="slogan">
@@ -51,16 +52,18 @@
       <div class="attractions">
         <template id="attraction-template">
           <div class="attractions-item">
-            <div class="attractions-img">
-              <img src="" alt="attractions" />
-              <div class="name-banner">
-                <p class="name"></p>
+            <a href="/attraction/{id}" class="attraction-link">
+              <div class="attractions-img">
+                <img src="" alt="attractions" />
+                <div class="name-banner">
+                  <p class="name"></p>
+                </div>
               </div>
-            </div>
-            <div class="info-container">
-              <p class="category"></p>
-              <p class="mrt"></p>
-            </div>
+              <div class="info-container">
+                <p class="category"></p>
+                <p class="mrt"></p>
+              </div>
+            </a>
           </div>
         </template>
       </div>

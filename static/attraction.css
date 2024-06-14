@@ -1,0 +1,971 @@
+* {
+  /* debug用　使用完刪除 */
+  /* outline: 1px red solid; */
+  font-family: Noto Sans TC;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 1200px;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /*  */
+
+  .section {
+    width: 1200px;
+    height: 400px;
+    position: relative;
+    /* top: 44px; */
+    display: flex;
+    margin: 40px auto 0;
+    justify-content: space-around;
+  }
+  .section_picture_current {
+    width: 540px;
+    height: 400px;
+    /* left: 15px; */
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    align-items: center; /*垂直置中arrow*/
+    justify-content: center;
+  }
+  .section_picture_current img {
+    width: 540px;
+    height: 400px;
+
+    /* height: 406px; */
+  }
+  .picture_current_arrow {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 520px;
+  }
+  .picture_current_left_arrow {
+    left: 0px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_left_arrow.png");
+  }
+  .picture_current_right_arrow {
+    right: 0px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_right_arrow.png");
+  }
+  .point-group {
+    position: absolute;
+    bottom: 15px;
+    width: 300px;
+    height: 12px;
+    border-radius: 7px;
+    list-style-type: none; /*hide ::marker*/
+    display: flex;
+    justify-content: center;
+  }
+
+  .point-group li {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: relative;
+  }
+  .point-group li.active::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
+  }
+  .section_profile {
+    width: 600px;
+    height: 400px;
+    left: 585px;
+  }
+  .section_profile_name {
+    font-size: 24px;
+    color: #666666;
+    height: 40px; /**/
+    /* line-height: 33px; */
+    align-content: center;
+  }
+  .section_profile_category,
+  .at,
+  .section_profile_mrt {
+    display: inline-block;
+    vertical-align: middle;
+    color: #666666;
+  }
+  .booking_form {
+    width: 600px;
+    height: 302px;
+    position: absolute;
+    top: 90px;
+    border-radius: 5px;
+    background: #e8e8e8;
+  }
+  .booking_form_content {
+    /*位置調整*/
+    position: relative;
+    left: 20px;
+    top: 15px;
+  }
+  .booking_form_content > div {
+    margin-bottom: 15px; /* 在每個子元素下添加15px的下邊距 */
+    color: #666666;
+  }
+  .booking_form_title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .booking_form_time {
+    display: flex;
+  }
+  input[type="date"] {
+    /* 取消日期邊框 */
+    border: none;
+  }
+  .radio-label {
+    display: flex;
+    font-size: 14px;
+    width: 87px;
+  }
+  .radio_button {
+    appearance: none;
+    /* -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; */
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    background-color: #ffffff;
+    outline: none;
+    border: none;
+    margin-right: 5px;
+    position: relative;
+  }
+
+  .radio_button:checked::before {
+    content: "";
+    position: absolute;
+    background-color: #448899;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+
+  .booking_form_btn {
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 154px;
+    height: 36px;
+    font-size: 19px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /*  */
+  .section-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 1200px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    /* top: 40px; */
+    /* position: absolute; */
+    /* z-index: 1000; */
+  }
+
+  .infors {
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    /* height: 362px; */
+    top: 574px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /* position: absolute; */
+    color: #666666;
+  }
+
+  .address,
+  .transport {
+    font-weight: bold;
+    margin-top: 22px;
+    margin-bottom: 5px;
+    padding: 0px 10px;
+  }
+
+  .address-content,
+  .transport-content {
+    font-weight: 400;
+    padding: 0px 10px;
+  }
+  .description {
+    font-weight: 400;
+    padding: 10px 10px;
+  }
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ... */
+
+  .section_picture_current img {
+    display: none;
+  }
+
+  .section_picture_current img.active {
+    display: block;
+  }
+}
+
+/* @media screen and (max-width: 768px) {
+    如果你希望在某些情況下(如移動設備上)不使用 position: fixed,
+    而是讓導航欄隨著頁面滾動,你可以使用媒體查詢來根據視口的大小應用不同的樣式。
+    這樣,在較小的屏幕上,導航欄將恢復為靜態定位,其他元素也不需要添加額外的上邊距。
+請根據你的實際需求選擇合適的方法,以確保導航欄和其他元素能夠正常顯示,並維持流式排版。
+    .navigation {
+      position: static;
+    }
+    navi bar可以用position sticky
+    .content {
+      margin-top: 0;
+    }
+  } */
+@media (min-width: 750px) and (max-width: 1199px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    margin-left: 10px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    margin-right: 10px;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /*  */
+
+  .section {
+    width: 95vw;
+    height: 400px;
+    position: relative;
+    /* top: 44px; */
+    display: flex;
+    margin: 40px auto 0;
+    justify-content: space-around;
+  }
+  .section_picture_current {
+    width: 540px;
+    height: 400px;
+    /* left: 15px; */
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    align-items: center; /*垂直置中arrow*/
+    justify-content: center;
+    overflow: hidden;
+  }
+  .section_picture_current img {
+    width: 540px;
+    height: 400px;
+    object-fit: cover;
+    /* height: 406px; */
+  }
+  .picture_current_arrow {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+  }
+  .picture_current_left_arrow {
+    margin-left: 10px;
+    left: 0px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_left_arrow.png");
+  }
+  .picture_current_right_arrow {
+    margin-right: 10px;
+
+    right: 0px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_right_arrow.png");
+  }
+  .point-group {
+    position: absolute;
+    bottom: 15px;
+    width: 300px;
+    height: 12px;
+    border-radius: 7px;
+    list-style-type: none; /*hide ::marker*/
+    display: flex;
+    justify-content: center;
+  }
+
+  .point-group li {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: relative;
+  }
+  .point-group li.active::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
+  }
+  .section_profile {
+    width: 600px;
+    height: 400px;
+    left: 585px;
+    margin-left: 30px;
+  }
+  .section_profile_name {
+    font-size: 24px;
+    color: #666666;
+    height: 40px; /**/
+    /* line-height: 33px; */
+    align-content: center;
+  }
+  .section_profile_category,
+  .at,
+  .section_profile_mrt {
+    display: inline-block;
+    vertical-align: middle;
+    color: #666666;
+  }
+  .booking_form {
+    width: 600px;
+    height: 302px;
+    position: absolute;
+    top: 90px;
+    border-radius: 5px;
+    background: #e8e8e8;
+  }
+  .booking_form_content {
+    /*位置調整*/
+    position: relative;
+    left: 20px;
+    top: 15px;
+  }
+  .booking_form_content > div {
+    margin-bottom: 15px; /* 在每個子元素下添加15px的下邊距 */
+    color: #666666;
+  }
+  .booking_form_title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .booking_form_time {
+    display: flex;
+  }
+  input[type="date"] {
+    /* 取消日期邊框 */
+    border: none;
+  }
+  .radio-label {
+    display: flex;
+    font-size: 14px;
+    width: 87px;
+  }
+  .radio_button {
+    appearance: none;
+    /* -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; */
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    background-color: #ffffff;
+    outline: none;
+    border: none;
+    margin-right: 5px;
+    position: relative;
+  }
+
+  .radio_button:checked::before {
+    content: "";
+    position: absolute;
+    background-color: #448899;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+
+  .booking_form_btn {
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 154px;
+    height: 36px;
+    font-size: 19px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /*  */
+  .section-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 1200px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    /* top: 40px; */
+    /* position: absolute; */
+    /* z-index: 1000; */
+  }
+
+  .infors {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    /* height: 362px; */
+    top: 574px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /* position: absolute; */
+    color: #666666;
+  }
+
+  .address,
+  .transport {
+    font-weight: bold;
+    margin-top: 22px;
+    margin-bottom: 5px;
+    padding: 0px 10px;
+  }
+
+  .address-content,
+  .transport-content {
+    font-weight: 400;
+    padding: 0px 10px;
+  }
+  .description {
+    font-weight: 400;
+    padding: 10px 10px;
+  }
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ... */
+
+  .section_picture_current img {
+    display: none;
+  }
+
+  .section_picture_current img.active {
+    display: block;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 750px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin-left: 10px;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    margin-right: 10px;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /*  */
+
+  .section {
+    width: 100vw;
+    /* height: 400px; */
+    position: relative;
+    /* top: 44px; */
+    display: flex;
+    margin: 40px auto 0;
+    /* justify-content: space-around; */
+    flex-direction: column;
+  }
+  .section_picture_current {
+    width: 100vw;
+    height: 350px;
+    /* left: 15px; */
+    /* border-radius: 5px; */
+    display: flex;
+    position: relative;
+    align-items: center; /*垂直置中arrow*/
+    justify-content: center;
+    overflow: hidden;
+  }
+  .section_picture_current img {
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
+  }
+  .picture_current_arrow {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100vw;
+  }
+  .picture_current_left_arrow {
+    margin-left: 10px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_left_arrow.png");
+  }
+  .picture_current_right_arrow {
+    margin-right: 10px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.75;
+    background-image: url("/static/icon/attraction_right_arrow.png");
+  }
+  .point-group {
+    position: absolute;
+    bottom: 15px;
+    width: 300px;
+    height: 12px;
+    border-radius: 7px;
+    list-style-type: none; /*hide ::marker*/
+    display: flex;
+    justify-content: center;
+  }
+
+  .point-group li {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: relative;
+  }
+  .point-group li.active::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
+  }
+  .section_profile {
+    min-width: 340px;
+    /* width: 95vw; */
+    /* height: 390px; */
+    margin-top: 20px;
+    /* left: 585px; */
+    display: flex;
+    flex-direction: column;
+  }
+  .section_profile_name {
+    font-size: 24px;
+    width: 95vw;
+    color: #666666;
+    height: 35px; /**/
+    margin-left: 10px;
+    /* line-height: 33px; */
+    align-content: center;
+  }
+  .section_profile_info {
+    display: flex;
+    margin-left: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  .section_profile_category,
+  .at,
+  .section_profile_mrt {
+    /* display: inline-block;
+    vertical-align: middle; */
+    /* display: flex;
+    align-items: center; */
+    margin-left: 5px;
+    color: #666666;
+  }
+  .booking_form {
+    min-width: 340px;
+    width: 95vw;
+    height: 302px;
+    /* position: relative; */
+    /* top: 90px; */
+    border-radius: 5px;
+    background: #e8e8e8;
+    display: flex;
+    margin: 0 auto;
+  }
+  .booking_form_content {
+    /*位置調整*/
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 15px;
+    /* left: 20px;
+    top: 15px; */
+  }
+  .booking_form_content > div {
+    margin-bottom: 15px; /* 在每個子元素下添加15px的下邊距 */
+    color: #666666;
+  }
+  .booking_form_title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .booking_form_time {
+    display: flex;
+  }
+  input[type="date"] {
+    /* 取消日期邊框 */
+    border: none;
+  }
+
+  .radio-label {
+    display: flex;
+    font-size: 14px;
+    width: 87px;
+  }
+  .radio_button {
+    appearance: none;
+    /* -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none; */
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    background-color: #ffffff;
+    outline: none;
+    border: none;
+    margin-right: 5px;
+    position: relative;
+  }
+
+  .radio_button:checked::before {
+    content: "";
+    position: absolute;
+    background-color: #448899;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+  }
+
+  .booking_form_btn {
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 154px;
+    height: 36px;
+    font-size: 19px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /*  */
+  .section-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 1200px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    /* top: 40px; */
+    /* position: absolute; */
+    /* z-index: 1000; */
+  }
+
+  .infors {
+    display: flex;
+    flex-direction: column;
+    min-width: 340px;
+    width: 95vw;
+    /* height: 362px; */
+    top: 574px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    /* position: absolute; */
+    color: #666666;
+  }
+
+  .address,
+  .transport {
+    font-weight: bold;
+    margin-top: 22px;
+    margin-bottom: 5px;
+    padding: 0px 10px;
+  }
+
+  .address-content,
+  .transport-content {
+    font-weight: 400;
+    padding: 0px 10px;
+  }
+  .description {
+    font-weight: 400;
+    padding: 10px 10px;
+  }
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+  /* ... */
+
+  .section_picture_current img {
+    display: none;
+  }
+
+  .section_picture_current img.active {
+    display: block;
+  }
+}
