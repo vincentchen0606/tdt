@@ -199,6 +199,11 @@
   input[type="date"] {
     /* 取消日期邊框 */
     border: none;
+    /* 調整padding */
+    box-sizing: border-box;
+    padding: 10px;
+    width: 193px;
+    height: 35px;
   }
   .radio-label {
     display: flex;
@@ -525,6 +530,11 @@
   input[type="date"] {
     /* 取消日期邊框 */
     border: none;
+    /* 調整padding */
+    box-sizing: border-box;
+    padding: 10px;
+    width: 193px;
+    height: 35px;
   }
   .radio-label {
     display: flex;
