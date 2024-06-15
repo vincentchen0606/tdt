@@ -715,7 +715,7 @@
     position: relative;
     /* top: 44px; */
     display: flex;
-    margin: 40px auto 0;
+    /* margin: 40px auto 0; */
     /* justify-content: space-around; */
     flex-direction: column;
   }
@@ -854,6 +854,11 @@
   input[type="date"] {
     /* 取消日期邊框 */
     border: none;
+    /* 調整padding */
+    box-sizing: border-box;
+    padding: 10px;
+    width: 193px;
+    height: 35px;
   }
 
   .radio-label {
