@@ -5,6 +5,18 @@ from fastapi import FastAPI, HTTPException
 from mysql.connector import connect
 from pydantic import BaseModel
 from typing import List, Optional
+
+# 
+from datetime import datetime, timedelta
+
+# 在檔案開頭導入所需的模組
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+import jwt
+from pydantic import BaseModel
+
+
+# 
 #for static file
 from fastapi.staticfiles import StaticFiles
 class ErrorResponse(BaseModel):
@@ -26,6 +38,15 @@ class Attraction(BaseModel):
 class AttractionsResponse(BaseModel):
 	data: List[Attraction]
 	nextPage: Optional[int]
+class UserSignUp(BaseModel):
+    # 因nullable:true 故Optional[str]表可以為null
+    name: Optional[str]
+    email: Optional[str]
+    password: Optional[str]
+class User(BaseModel):
+     id: Optional[int]
+     name: Optional[str]
+     email: Optional[str]
 app=FastAPI()
 # 註冊靜態文件，讓程式可以從static檔案偵測到CSS檔
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -236,6 +257,239 @@ async def get_attraction(attractionId: int):
     
     except Exception as e:
         return JSONResponse(status_code=500, content=ErrorResponse(message=str(e)).dict())
+
+# USER POST /api/user
+@app.post("/api/user", responses={
+    200: {"description": "註冊成功",
+          "content": {
+            "application/json": {
+                    "ok": True,
+            }
+        }},
+    400: {
+        "description": "註冊失敗，重複的 Email 或其他原因",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    },
+    500: {
+        "description": "伺服器內部錯誤",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                    "error": True,
+                    "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    }
+})
+async def signup(user: UserSignUp):
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        # 檢查 email 是否已經存在
+        query = "SELECT * FROM member_system WHERE email = %s"
+        cursor.execute(query, (user.email,))
+        result = cursor.fetchone()
+
+        if result:
+            cursor.close()
+            db.close()
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": True,
+                    "message": "該 Email 已經被註冊過了"
+                }
+            )
+
+        # 將用戶資料插入資料庫
+        query = "INSERT INTO member_system (name, email, password) VALUES (%s, %s, %s)"
+        cursor.execute(query, (user.name, user.email, user.password))
+        db.commit()
+
+        cursor.close()
+        db.close()
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "ok": True
+            }
+        )
+
+    
+
+    except Exception as e:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": True,
+                "message": f"伺服器內部錯誤：{str(e)}"
+            }
+        )
+
+
+
+# USER GET /api/user/auth 每一頁的登入狀態驗證
+JWT_SECRET = "your_jwt_secret_key"
+JWT_ALGORITHM = "HS256"
+
+def get_current_user(authorization: str = Header(None)):
+    if not authorization:
+        return None
+
+    token = authorization.split(" ")[1]
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        user_id = payload["id"]
+        return user_id
+    except:
+        return None
+
+@app.get("/api/user/auth")
+async def get_user_auth(user_id: int = Depends(get_current_user)):
+    if user_id is None:
+        return JSONResponse(content={"data": None})
+
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        query = "SELECT id, name, email FROM member_system WHERE id = %s"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+
+        if not result:
+            return JSONResponse(content={"data": None})
+
+
+        user_data = {
+            "id": result[0],
+            "name": result[1],
+            "email": result[2]
+        }
+
+        cursor.close()
+        db.close()
+
+        return JSONResponse(content={"data": user_data})
+
+    except:
+        return JSONResponse(content={"data": None})
+    
+# USER PUT /api/user/auth
+# 定義 OAuth2 scheme
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/auth")
+
+class UserSignIn(BaseModel):
+    email: str
+    password: str
+
+@app.put("/api/user/auth", response_model=dict, responses={
+    200: {"description": "登入成功"},
+    400: {
+        "description": "登入失敗,帳號或密碼錯誤",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    },
+    500: {
+        "description": "伺服器內部錯誤",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    }
+})
+async def signin(user: UserSignIn):
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        query = "SELECT id, name, email, password FROM member_system WHERE email = %s"
+        cursor.execute(query, (user.email,))
+        result = cursor.fetchone()
+
+        if not result:
+            cursor.close()
+            db.close()
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": True,
+                    "message": "帳號或密碼錯誤"
+                }
+            )
+
+        user_id, name, email, hashed_password = result
+
+        if user.password != hashed_password:
+            cursor.close()
+            db.close()
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": True,
+                    "message": "帳號或密碼錯誤"
+                }
+            )
+
+
+        # 生成 JWT token
+        expiration = datetime.utcnow() + timedelta(days=7)
+        token = jwt.encode(
+            {"id": user_id, "name": name, "email": email, "exp": expiration},
+            JWT_SECRET,
+            algorithm=JWT_ALGORITHM
+        )
+
+        cursor.close()
+        db.close()
+
+        return {"token": token}
+
+    except HTTPException as e:
+        raise e
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"伺服器內部錯誤：{str(e)}",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+
+
+
+
+
 
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)

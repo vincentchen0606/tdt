@@ -6,6 +6,7 @@
     <title>臺北一日遊Home Page</title>
     <link rel="stylesheet" href="/static/index.css" />
     <script src="/static/js/index.js"></script>
+    <script src="/static/js/auth.js"></script>
   </head>
   <body>
     <div class="navigation" id="navigation">
@@ -14,7 +15,8 @@
           ><h2 class="nav_h2">台北一日遊</h2></a
         >
         <div class="button_container">
-          <button>預定行程</button><button>登入/註冊</button>
+          <button>預定行程</button
+          ><button class="signinup-btn">登入/註冊</button>
         </div>
       </div>
     </div>
@@ -68,6 +70,60 @@
         </template>
       </div>
     </main>
+    <section class="overlay" style="display: none">
+      <dialog class="sign-in-block">
+        <div class="decorator-bar"></div>
+        <button class="close-btn">x</button>
+        <div class="sign-in-form">
+          <h3 class="sign-in-title">登入會員帳號</h3>
+          <input
+            type="text"
+            id="signin-email"
+            name="signin-email"
+            placeholder="輸入電子信箱"
+          />
+          <input
+            type="password"
+            id="signin-password"
+            name="signin-password"
+            placeholder="輸入密碼"
+          />
+          <button class="sign-in-btn">登入帳戶</button>
+          <div id="error-msg" style="display: none; color: red"></div>
+          <div id="success-msg" style="display: none; color: green"></div>
+          <button class="to-sign-up">還沒有帳戶？點此註冊</button>
+        </div>
+      </dialog>
+      <dialog class="sign-up-block" style="display: none">
+        <div class="decorator-bar"></div>
+        <button class="close-btn">x</button>
+        <div class="sign-up-form">
+          <h3 class="sign-up-title">註冊會員帳號</h3>
+          <input
+            type="text"
+            id="signup-name"
+            name="signup-name"
+            placeholder="輸入姓名"
+          />
+          <input
+            type="text"
+            id="signup-email"
+            name="signup-email"
+            placeholder="輸入電子信箱"
+          />
+          <input
+            type="password"
+            id="signup-password"
+            name="signup-password"
+            placeholder="輸入密碼"
+          />
+          <button class="sign-up-btn">註冊新帳戶</button>
+          <div id="error-msg" style="display: none; color: red"></div>
+          <div id="success-msg" style="display: none; color: green"></div>
+          <button class="to-sign-in">已經有帳戶了？點此登入</button>
+        </div>
+      </dialog>
+    </section>
     <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
   </body>
 </html>
