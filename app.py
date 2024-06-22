@@ -342,7 +342,7 @@ async def signup(user: UserSignUp):
 
 
 # USER GET /api/user/auth 每一頁的登入狀態驗證
-JWT_SECRET = "your_jwt_secret_key"
+JWT_SECRET = "your_jwt_secret_key"  #要另外弄個檔案去存放，不要上到版控
 JWT_ALGORITHM = "HS256"
 
 def get_current_user(authorization: str = Header(None)):

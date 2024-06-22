@@ -50,7 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // 點擊登入/註冊按鈕顯示登入對話框
   signInUpBtn.addEventListener("click", function () {
-    showDialog(signInBlock);
+    if (signInUpBtn.textContent === "登入/註冊") {
+      showDialog(signInBlock);
+    } else if (signInUpBtn.textContent === "登出系統") {
+      // 不執行任何操作，以免點登出系統跳出登入dialog
+    }
   });
 
   // 關閉按鈕事件
