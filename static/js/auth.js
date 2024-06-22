@@ -22,8 +22,32 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.style.display = "none";
     hideDialog(signInBlock);
     hideDialog(signUpBlock);
+    clearMessages(); // 清空錯誤或成功訊息
+    clearInputFields(); //清空輸入資訊
   }
-
+  //清空訊息函數
+  function clearMessages() {
+    if (signInerrorMsg || signUperrorMsg) {
+      signInerrorMsg.textContent = "";
+      signInerrorMsg.style.display = "none";
+      signUperrorMsg.textContent = "";
+      signUperrorMsg.style.display = "none";
+    }
+    if (signUpsuccessMsg) {
+      signUpsuccessMsg.textContent = "";
+      signUpsuccessMsg.style.display = "none";
+    }
+  }
+  //清空輸入框函數
+  function clearInputFields() {
+    // 清空所有輸入欄位
+    const inputs = document.querySelectorAll(
+      'input[type="text"], input[type="email"], input[type="password"]'
+    );
+    inputs.forEach((input) => {
+      input.value = "";
+    });
+  }
   // 點擊登入/註冊按鈕顯示登入對話框
   signInUpBtn.addEventListener("click", function () {
     showDialog(signInBlock);
@@ -50,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay) {
       hideAllDialogs();
+      clearMessages();
     }
   });
 
@@ -113,146 +138,164 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //登入流程
-document.addEventListener("DOMContentLoaded", function () {
-  // ...
+// document.addEventListener("DOMContentLoaded", function () {
+// ...
 
-  const signInBtn = document.querySelector(".sign-in-btn");
-  const signInEmailInput = document.querySelector("#signin-email");
-  const signInPasswordInput = document.querySelector("#signin-password");
-  const signInErrorMsgContainer = document.querySelector("#signin-error-msg");
+const signInBtn = document.querySelector(".sign-in-btn");
+const signInEmailInput = document.querySelector("#signin-email");
+const signInPasswordInput = document.querySelector("#signin-password");
+const signInerrorMsg = document.querySelector("#signin-error-msg");
 
-  signInBtn.addEventListener("click", async function () {
-    const email = signInEmailInput.value;
-    const password = signInPasswordInput.value;
-
-    // 檢查email格式
-    const emailRegex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    if (!emailRegex.test(email)) {
-      showErrorMessage("請輸入正確的電子郵件格式");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/user/auth", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-
-        // 在此處將token設置到請求的Authorization header中
-        fetch("/api/user/auth", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${data.token}`,
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Received data from backend:", data);
-            // 處理從後端接收到的數據
-            // ...
-          })
-          .catch((error) => {
-            console.error("Error fetching user auth:", error);
-          });
-
-        window.location.reload();
-      } else if (response.status === 400) {
-        const errorData = await response.json();
-        showErrorMessage(errorData.message);
-      } else {
-        throw new Error("登入失敗，請稍後再試");
-      }
-    } catch (error) {
-      console.error("登入時發生錯誤:", error);
-      showErrorMessage("登入失敗，請稍後再試");
-    }
-  });
-
-  function showErrorMessage(message) {
-    signInErrorMsgContainer.textContent = message;
-    signInErrorMsgContainer.style.display = "block";
+signInBtn.addEventListener("click", async function () {
+  const email = signInEmailInput.value;
+  const password = signInPasswordInput.value;
+  // 檢查email格式
+  const emailRegex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  if (!emailRegex.test(email)) {
+    signInShowerrorMsg("請輸入正確的電子郵件格式");
+    return;
   }
 
-  // ...
+  try {
+    const response = await fetch("/api/user/auth", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+
+      // 在此處將token設置到請求的Authorization header中
+      fetch("/api/user/auth", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Received data from backend:", data);
+          // 處理從後端接收到的數據
+          // ...
+        })
+        .catch((error) => {
+          console.error("Error fetching user auth:", error);
+        });
+
+      window.location.reload();
+    } else if (response.status === 400) {
+      const errorData = await response.json();
+      signInShowerrorMsg(errorData.message);
+    } else {
+      throw new Error("登入失敗，請稍後再試");
+    }
+  } catch (error) {
+    console.error("登入時發生錯誤:", error);
+    signInShowerrorMsg("登入失敗，請稍後再試");
+  }
 });
+
+function signInShowerrorMsg(message) {
+  signInerrorMsg.textContent = message;
+  signInerrorMsg.style.display = "block";
+  document.querySelector(".sign-in-form").style.height = "258px";
+  document.querySelector(".sign-in-block").style.height = "298px";
+}
+// })
+// 註冊功能
+// 假設這是在一個更大的 DOMContentLoaded 事件監聽器內部
 
 // 註冊功能
-document.addEventListener("DOMContentLoaded", function () {
-  const signUpBtn = document.querySelector(".sign-up-btn");
-  const signUpNameInput = document.querySelector("#signup-name");
-  const signUpEmailInput = document.querySelector("#signup-email");
-  const signUpPasswordInput = document.querySelector("#signup-password");
-  const signUpErrorMsgContainer = document.querySelector("#signup-error-msg");
-  const signUpSuccessMsgContainer = document.querySelector(
-    "#signup-success-msg"
-  );
+const signUpBtn = document.querySelector(".sign-up-btn");
+const signUpNameInput = document.querySelector("#signup-name");
+const signUpEmailInput = document.querySelector("#signup-email");
+const signUpPasswordInput = document.querySelector("#signup-password");
+const signUperrorMsg = document.querySelector("#signup-error-msg");
+const signUpsuccessMsg = document.querySelector("#signup-success-msg");
 
-  signUpBtn.addEventListener("click", async function () {
-    const name = signUpNameInput.value;
-    const email = signUpEmailInput.value;
-    const password = signUpPasswordInput.value;
+signUpBtn.addEventListener("click", async function (event) {
+  event.preventDefault();
 
-    // 檢查 email 和 password 是否為空
-    if (!email || !password || !name) {
-      showErrorMessage("請填寫所有欄位");
-      return;
-    }
-    // Check email format
-    const emailRegex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    if (!emailRegex.test(email)) {
-      showSignUpErrorMessage("請輸入正確的電子郵件格式");
-      console.log("格式");
-      return;
-    }
+  console.log("註冊按鈕被點擊");
 
-    try {
-      const response = await fetch("/api/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
+  const name = signUpNameInput.value;
+  const email = signUpEmailInput.value;
+  const password = signUpPasswordInput.value;
 
-      if (response.ok) {
-        showSignUpSuccessMessage("註冊成功，請登入系統");
-        // Clear input fields
-        signUpNameInput.value = "";
-        signUpEmailInput.value = "";
-        signUpPasswordInput.value = "";
-      } else if (response.status === 400) {
-        const errorData = await response.json();
-        showSignUpErrorMessage(errorData.message);
+  console.log("Name:", name, "Email:", email, "Password:", password);
+
+  if (!name || !email || !password) {
+    signupShowErrorMessage("請填寫所有欄位");
+    return;
+  }
+
+  const emailRegex = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  if (!emailRegex.test(email)) {
+    signupShowErrorMessage("請輸入正確的電子郵件格式");
+    return;
+  }
+
+  try {
+    console.log("開始發送註冊請求");
+    const response = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    console.log("收到伺服器響應", response.status);
+
+    const data = await response.json();
+
+    if (response.ok) {
+      signupShowSuccessMessage("註冊成功，請登入系統");
+      signUpNameInput.value = "";
+      signUpEmailInput.value = "";
+      signUpPasswordInput.value = "";
+    } else {
+      console.log("錯誤數據:", data);
+      if (response.status === 400) {
+        signupShowErrorMessage(data.message);
       } else if (response.status === 500) {
-        const errorData = await response.json();
-        showSignUpErrorMessage(errorData.message);
+        signupShowErrorMessage(data.message);
       } else {
-        throw new Error("註冊失敗，請稍後再試");
+        signupShowErrorMessage("註冊失敗，請稍後再試");
       }
-    } catch (error) {
-      console.error("註冊時發生錯誤:", error);
-      showSignUpErrorMessage("註冊失敗，請稍後再試");
     }
-  });
-
-  function showSignUpErrorMessage(message) {
-    signUpErrorMsgContainer.textContent = message;
-    signUpErrorMsgContainer.style.display = "block";
-    signUpSuccessMsgContainer.style.display = "none";
+  } catch (error) {
+    console.error("註冊時發生錯誤:", error);
+    signupShowErrorMessage("註冊失敗，請稍後再試");
   }
-
-  function showSignUpSuccessMessage(message) {
-    signUpSuccessMsgContainer.textContent = message;
-    signUpSuccessMsgContainer.style.display = "block";
-    signUpErrorMsgContainer.style.display = "none";
-  }
-
-  // ... (existing code)
 });
+
+function signupShowErrorMessage(message) {
+  console.log("顯示錯誤訊息:", message);
+  if (signUperrorMsg) {
+    signUperrorMsg.textContent = message;
+    signUperrorMsg.style.display = "block";
+    signUpsuccessMsg.style.display = "none";
+  } else {
+    console.error("錯誤container不存在");
+  }
+  document.querySelector(".sign-up-form").style.height = "315px";
+  document.querySelector(".sign-up-block").style.height = "355px";
+}
+
+function signupShowSuccessMessage(message) {
+  console.log("顯示成功訊息:", message);
+  if (signUpsuccessMsg) {
+    signUpsuccessMsg.textContent = message;
+    signUpsuccessMsg.style.display = "block";
+    signUperrorMsg.style.display = "none";
+  } else {
+    console.error("成功container不存在");
+  }
+  document.querySelector(".sign-up-form").style.height = "315px";
+  document.querySelector(".sign-up-block").style.height = "355px";
+}

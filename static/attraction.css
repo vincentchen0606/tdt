@@ -309,6 +309,182 @@
     align-items: center;
     justify-content: center;
   }
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    height: 275px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    height: 235px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    /* appearance: none; */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
+  }
   /* ... */
 
   .section_picture_current img {
@@ -644,10 +820,195 @@
   }
   /* ... */
 
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    min-height: 275px;
+
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    min-height: 235px;
+    top: 25px;
+    left: 15px;
+    box-sizing: border-box;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  #signin-error-msg,
+  #signup-error-msg,
+  #signup-success-msg {
+    display: inline-block;
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    /* appearance: none; */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
+  }
+  /*  */
   .section_picture_current img {
     display: none;
   }
-
   .section_picture_current img.active {
     display: block;
   }
@@ -979,6 +1340,191 @@
     width: 100vw;
     align-items: center;
     justify-content: center;
+  }
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    min-height: 275px;
+
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    min-height: 235px;
+    top: 25px;
+    left: 15px;
+    box-sizing: border-box;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  #signin-error-msg,
+  #signup-error-msg,
+  #signup-success-msg {
+    display: inline-block;
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    /* appearance: none; */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
   }
   /* ... */
 

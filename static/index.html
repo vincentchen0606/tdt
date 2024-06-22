@@ -6,7 +6,6 @@
     <title>臺北一日遊Home Page</title>
     <link rel="stylesheet" href="/static/index.css" />
     <script src="/static/js/index.js"></script>
-    <script src="/static/js/auth.js"></script>
   </head>
   <body>
     <div class="navigation" id="navigation">
@@ -89,8 +88,11 @@
             placeholder="輸入密碼"
           />
           <button class="sign-in-btn">登入帳戶</button>
-          <div id="error-msg" style="display: none; color: red"></div>
-          <div id="success-msg" style="display: none; color: green"></div>
+          <div id="signin-error-msg" style="display: none; color: red"></div>
+          <div
+            id="signin-success-msg"
+            style="display: none; color: green"
+          ></div>
           <button class="to-sign-up">還沒有帳戶？點此註冊</button>
         </div>
       </dialog>
@@ -118,12 +120,16 @@
             placeholder="輸入密碼"
           />
           <button class="sign-up-btn">註冊新帳戶</button>
-          <div id="error-msg" style="display: none; color: red"></div>
-          <div id="success-msg" style="display: none; color: green"></div>
+          <div id="signup-error-msg" style="display: none; color: red"></div>
+          <div
+            id="signup-success-msg"
+            style="display: none; color: green"
+          ></div>
           <button class="to-sign-in">已經有帳戶了？點此登入</button>
         </div>
       </dialog>
     </section>
     <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
+    <script src="/static/js/auth.js"></script>
   </body>
 </html>
