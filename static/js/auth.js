@@ -62,12 +62,16 @@ document.addEventListener("DOMContentLoaded", function () {
   toSignUpBtn.addEventListener("click", function () {
     hideDialog(signInBlock);
     showDialog(signUpBlock);
+    clearInputFields();
+    clearMessages();
   });
 
   // 切換到登入表單
   toSignInBtn.addEventListener("click", function () {
     hideDialog(signUpBlock);
     showDialog(signInBlock);
+    clearInputFields();
+    clearMessages();
   });
 
   // 點擊overlay背景關閉對話框
