@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         signInUpBtn.removeEventListener("click", showSignInDialog);
         signInUpBtn.addEventListener("click", signOut);
       } else {
-        // 沒有token或token無效,顯示登入按鈕
+        // 代表api回傳null沒有token或token無效,顯示登入按鈕
         localStorage.removeItem("token");
         signInUpBtn.textContent = "登入/註冊";
         signInUpBtn.removeEventListener("click", signOut);
@@ -163,7 +163,7 @@ signInBtn.addEventListener("click", async function () {
     signInShowerrorMsg("請輸入正確的電子郵件格式");
     return;
   }
-
+  // 連接api/user/auth put
   try {
     const response = await fetch("/api/user/auth", {
       method: "PUT",
@@ -194,7 +194,7 @@ signInBtn.addEventListener("click", async function () {
           console.error("Error fetching user auth:", error);
         });
 
-      window.location.reload();
+      window.location.reload(); //refresh當前頁面，藉此反應最新狀態
     } else if (response.status === 400) {
       const errorData = await response.json();
       signInShowerrorMsg(errorData.message);
@@ -206,7 +206,7 @@ signInBtn.addEventListener("click", async function () {
     signInShowerrorMsg("登入失敗，請稍後再試");
   }
 });
-
+//改變高度容納Msg
 function signInShowerrorMsg(message) {
   signInerrorMsg.textContent = message;
   signInerrorMsg.style.display = "block";
