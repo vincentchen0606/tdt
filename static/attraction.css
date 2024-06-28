@@ -415,7 +415,7 @@
   .to-sign-up {
     /* position: absolute; */
     display: block;
-    /* appearance: none; */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
@@ -476,6 +476,7 @@
   .to-sign-in {
     /* position: absolute; */
     display: block;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
@@ -935,7 +936,7 @@
   .to-sign-up {
     /* position: absolute; */
     display: block;
-    /* appearance: none; */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
@@ -996,6 +997,7 @@
   .to-sign-in {
     /* position: absolute; */
     display: block;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
@@ -1456,7 +1458,7 @@
   .to-sign-up {
     /* position: absolute; */
     display: block;
-    /* appearance: none; */
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;
@@ -1517,6 +1519,7 @@
   .to-sign-in {
     /* position: absolute; */
     display: block;
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     border: none;

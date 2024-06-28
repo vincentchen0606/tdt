@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 import jwt
+import json
 from pydantic import BaseModel
 
 
@@ -47,6 +48,7 @@ class User(BaseModel):
      id: Optional[int]
      name: Optional[str]
      email: Optional[str]
+
 app=FastAPI()
 # 註冊靜態文件，讓程式可以從static檔案偵測到CSS檔
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -342,57 +344,29 @@ async def signup(user: UserSignUp):
 
 
 # USER GET /api/user/auth 每一頁的登入狀態驗證
-JWT_SECRET = "your_jwt_secret_key"  #要另外弄個檔案去存放，不要上到版控
+JWT_SECRET = "your_jwt_secret_key"  # 要另外弄個檔案去存放，不要上到版控
 JWT_ALGORITHM = "HS256"
 
 def get_current_user(authorization: str = Header(None)):
     if not authorization:
         return None
-
-    token = authorization.split(" ")[1]
     try:
+        token = authorization.split(" ")[1]
         payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-        user_id = payload["id"]
-        return user_id
+        return {
+            "id": payload["id"],
+            "name": payload["name"],
+            "email": payload["email"]
+        }
     except:
         return None
-
 @app.get("/api/user/auth")
-async def get_user_auth(user_id: int = Depends(get_current_user)):
-    if user_id is None:
+# 依賴注入
+async def get_user_auth(user_data: dict = Depends(get_current_user)):
+    if user_data is None:
         return JSONResponse(content={"data": None})
+    return JSONResponse(content={"data": user_data})
 
-    try:
-        db = connect(
-            host="127.0.0.1",
-            user="root",
-            password="abc123456",
-            database="taipei_attraction"
-        )
-        cursor = db.cursor()
-
-        query = "SELECT id, name, email FROM member_system WHERE id = %s"
-        cursor.execute(query, (user_id,))
-        result = cursor.fetchone()
-
-        if not result:
-            return JSONResponse(content={"data": None})
-
-
-        user_data = {
-            "id": result[0],
-            "name": result[1],
-            "email": result[2]
-        }
-
-        cursor.close()
-        db.close()
-
-        return JSONResponse(content={"data": user_data})
-
-    except:
-        return JSONResponse(content={"data": None})
-    
 # USER PUT /api/user/auth
 # 定義 OAuth2 scheme
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/auth")
@@ -486,9 +460,254 @@ async def signin(user: UserSignIn):
             headers={"WWW-Authenticate": "Bearer"}
         )
 
+# Booking GET /api/booking 取得尚未確認下單的預定行程
+@app.get("/api/booking", response_model=dict, responses={
+    200: {"description": "建立成功"},
+    403: {
+         "description": "未登入系統，拒絕存取",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    }
+})
+async def get_booking(user_data: dict = Depends(get_current_user)):
+    if user_data is None:
+        return JSONResponse(
+            status_code=403,
+            content={
+                "error": True,
+                "message": "未登入系統，拒絕存取"
+            }
+        )
+    user_id = user_data["id"]
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
 
+        # 查詢該使用者的預定行程資料
+        query = """
+            SELECT b.date, b.time, b.price, a.id, a.name, a.address, JSON_EXTRACT(a.images, '$[0]') AS image
+            FROM bookings b
+            JOIN attractions a ON b.attraction_id = a.id
+            WHERE b.user_id = %s
+        """
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
 
+        if result:
+            booking_data = {
+                "attraction": {
+                    "id": result[3],
+                    "name": result[4],
+                    "address": result[5],
+                    "image": result[6].strip('\"').rstrip('\\') #使用strip('\"')去除開頭的雙引號。接著，使用rstrip('\\')去除末尾的反斜線
+                },
+                "date": result[0].strftime("%Y-%m-%d"),  # 將日期轉換為字串格式,
+                "time": result[1],
+                "price": int(result[2])  # 將 Decimal 轉換為 整數
+            }
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "data": booking_data
+                }
+            )
+        else:
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "data": None
+                }
+            )
 
+    except Exception as e:
+        if "Incorrect integer value" in str(e) or "Incorrect date value" in str(e):
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": True,
+                    "message": "輸入格式錯誤"
+                }
+            )
+        else:
+            return JSONResponse(
+                status_code=500,
+                content={
+                    "error": True,
+                    "message": f"伺服器內部錯誤：{str(e)}"
+                }
+            )
+class BookingData(BaseModel):
+    attractionId: int
+    date: str
+    time: str
+    price: int
+# Booking POST /api/booking 建立新的預定行程
+@app.post("/api/booking", response_model=dict, responses={
+    200: {"description": "建立成功"},
+    400: {
+        "description": "建立失敗，輸入不正確或其他原因",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    },
+    403: {
+         "description": "未登入系統，拒絕存取",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    },
+    500: {
+        "description": "伺服器內部錯誤",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    }
+})
+async def create_booking(booking: BookingData, user_data: dict = Depends(get_current_user)):
+    if user_data is None:
+        return JSONResponse(
+            status_code=403,
+            content={
+                "error": True,
+                "message": "未登入系統，拒絕存取"
+            }
+        )
+
+    user_id = user_data["id"]
+
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        # 檢查該使用者是否已有預定行程
+        query = "SELECT * FROM bookings WHERE user_id = %s"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+
+        if result:
+            # 如果已有預定行程，先刪除舊的行程資料
+            delete_query = "DELETE FROM bookings WHERE user_id = %s"
+            cursor.execute(delete_query, (user_id,))
+            db.commit()
+
+        # 將新的預定行程資料寫入資料庫　
+        #因為AUTO_INCREMENT 屬性定義主鍵時，該列的值會自動遞增。
+        #當你刪除某些資料並插入新資料時，MySQL 並不會重複使用已刪除的主鍵值，而是繼續遞增主鍵值。
+        insert_query = "INSERT INTO bookings (user_id, attraction_id, date, time, price) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (user_id, booking.attractionId, booking.date, booking.time, booking.price))
+        db.commit()
+
+        cursor.close()
+        db.close()
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "ok": True
+            }
+        )
+
+    except Exception as e:
+        if "Incorrect integer value" in str(e) or "Incorrect date value" in str(e):
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": True,
+                    "message": "輸入格式錯誤"
+                }
+            )
+        else:
+            return JSONResponse(
+                status_code=500,
+                content={
+                    "error": True,
+                    "message": f"伺服器內部錯誤：{str(e)}"
+                }
+            )
+
+# Booking DELETE /api/booking 刪除目前的預定行程
+@app.delete("/api/booking", response_model=dict, responses={
+    200: {"description": "建立成功"},
+    403: {
+        "description": "未登入系統，拒絕存取",
+        "model": ErrorResponse,
+        "content": {
+            "application/json": {
+                "error": True,
+                "message": "請按照情境提供對應的錯誤訊息"
+            }
+        }
+    }
+})
+async def delete_booking(user_data: dict = Depends(get_current_user)):
+    if user_data is None:
+        return JSONResponse(
+            status_code=403,
+            content={
+                "error": True,
+                "message": "未登入系統，拒絕存取"
+            }
+        )
+
+    user_id = user_data["id"]
+
+    try:
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        # 檢查該使用者是否已有預定行程
+        query = "SELECT * FROM bookings WHERE user_id = %s"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchone()
+
+        if result:
+            # 如果已有預定行程，先刪除舊的行程資料
+            delete_query = "DELETE FROM bookings WHERE user_id = %s"
+            cursor.execute(delete_query, (user_id,))
+            db.commit()
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "ok": True
+            }
+        )
+
+    except Exception as e:
+    # 處理異常情況，回傳符合規格的錯誤訊息
+    	return {"error": True, "message": str(e)}
 
 
 # Static Pages (Never Modify Code in this Block)

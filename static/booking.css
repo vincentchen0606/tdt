@@ -1,0 +1,1581 @@
+* {
+  /* debug用　使用完刪除 */
+  /* outline: 1px red solid; */
+  font-family: Noto Sans TC;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+@media (min-width: 1200px) and (max-width: 1920px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 1200px;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin: 0;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /* headline */
+  .headline {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    width: 1000px;
+    height: 27px;
+    /* position: absolute;
+    top: 94px; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .customer-name {
+    display: inline;
+  }
+
+  .journey-block {
+    width: 980px;
+    height: 200px;
+    margin-top: 30px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .first-picture {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .first-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .journey-infor {
+    position: relative;
+    margin-left: 30px;
+    width: 700px;
+    height: 170px;
+  }
+  .delete-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-image: url("/static/icon/delete.png");
+  }
+  .journey-infor-tdt {
+    font-weight: 700;
+    color: #448899;
+    height: 24px;
+  }
+  .journey-infor-name {
+    display: inline; /*同一行*/
+  }
+  .journey-infor-date-block {
+    margin-top: 20px;
+    height: 24px;
+  }
+  .journey-infor-time-block,
+  .journey-infor-price-block,
+  .journey-infor-location-block {
+    margin-top: 10px;
+    height: 24px;
+  }
+  .money {
+    color: #666666;
+  }
+  .journey-infor-title {
+    font-weight: 700;
+    color: #666666;
+  }
+  .date,
+  .time,
+  .price,
+  .location {
+    color: #666666;
+  }
+
+  .section-divider-1 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact-block {
+    width: 980px;
+    height: 227px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form-group-name {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .contact-form-group-email,
+  .contact-form-group-number {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .field-notice {
+    height: 24px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #666666;
+  }
+  .contact-form-title {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .contact-form-group-name input,
+  .contact-form-group-email input,
+  .contact-form-group-number input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-2 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 1200px;
+  }
+  .payment {
+    width: 980px;
+    height: 188px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .payment-info {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .card-number {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .expired-time,
+  .cvv {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .card-number input,
+  .expired-time input,
+  .cvv input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    color: #757575;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-3 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 1200px;
+  }
+  .confirm-block {
+    width: 980px;
+    height: 100px;
+    margin-top: 40px;
+    position: relative;
+  }
+  .confirm-price {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 174px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    color: #666666;
+    text-align: right; /*靠右對齊*/
+  }
+  .confirm-price-check {
+    display: inline;
+  }
+  .confirm-payment-Btn {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 173px;
+    height: 36px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .empty-state {
+    width: 1000px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+    color: #666666;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+  }
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    min-height: 275px;
+
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    min-height: 235px;
+    top: 25px;
+    left: 15px;
+    box-sizing: border-box;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  #signin-error-msg,
+  #signup-error-msg,
+  #signup-success-msg {
+    display: inline-block;
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
+  }
+  /* ... */
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 750px) and (max-width: 1199px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin-left: 10px;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    margin-right: 10px;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /*  */
+  /* headline */
+  .headline {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    width: 94.44vw;
+    height: 27px;
+    /* position: absolute;
+        top: 94px; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .customer-name {
+    display: inline;
+  }
+
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    min-height: 275px;
+
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    min-height: 235px;
+    top: 25px;
+    left: 15px;
+    box-sizing: border-box;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  #signin-error-msg,
+  #signup-error-msg,
+  #signup-success-msg {
+    display: inline-block;
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
+  }
+  /* ... */
+  /* 此為訂購資訊區塊 */
+
+  .first-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .first-picture {
+    height: 200px;
+    min-width: 340px;
+    width: 94.44vw;
+    /* background-color: #448899; */
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+  .journey-infor {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    min-width: 340px;
+    width: 94.44vw;
+    height: 200px;
+  }
+  .delete-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-image: url("/static/icon/delete.png");
+  }
+  .journey-infor-tdt {
+    font-weight: 700;
+    color: #448899;
+    height: 24px;
+  }
+  .journey-infor-name {
+    display: inline; /*同一行*/
+  }
+  .journey-infor-date-block {
+    margin-top: 20px;
+    height: 24px;
+  }
+  .journey-infor-time-block,
+  .journey-infor-price-block,
+  .journey-infor-location-block {
+    margin-top: 10px;
+    height: 24px;
+  }
+  .money {
+    color: #666666;
+  }
+  .journey-infor-title {
+    font-weight: 700;
+    color: #666666;
+  }
+  .date,
+  .time,
+  .price,
+  .location {
+    color: #666666;
+  }
+  .section-divider-1 {
+    border: 1px solid #e8e8e8;
+    margin-top: 30px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-block {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 256px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form-group-name {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .contact-form-group-email,
+  .contact-form-group-number {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .field-notice {
+    width: 94.44vw;
+    min-width: 340px;
+    height: 48px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #666666;
+  }
+  .contact-form-title {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .contact-form-group-name input,
+  .contact-form-group-email input,
+  .contact-form-group-number input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-2 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .payment {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 188px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .payment-info {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .card-number {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .expired-time,
+  .cvv {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .card-number input,
+  .expired-time input,
+  .cvv input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    color: #757575;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-3 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .confirm-block {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 100px;
+    margin-top: 40px;
+    position: relative;
+  }
+  .confirm-price {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 174px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    color: #666666;
+    text-align: right; /*靠右對齊*/
+  }
+  .confirm-price-check {
+    display: inline;
+  }
+  .confirm-payment-Btn {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 173px;
+    height: 36px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .empty-state {
+    width: 94.44vw;
+    min-width: 340px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+    color: #666666;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+  }
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 750px) {
+  .main {
+    padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
+    display: flex;
+    flex-direction: column; /*nav section infors footer垂直排*/
+    align-items: center;
+  }
+  .navigation {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 54px;
+    /* padding: 10px 0; */
+    position: fixed; /* 將 position 設置為 fixed */
+    top: 0; /* 將navigation固定在頂部 */
+    background-color: white; /* 確保navigation不被其他元素遮擋 */
+    z-index: 999; /* 設置 z-index,確保導航欄在最上層 */
+  }
+  .navigation-divider {
+    border: 1px solid #e8e8e8;
+    border-top: 0px;
+    width: 100vw;
+    top: 54px;
+    position: absolute;
+    /* z-index: 1000; */
+  }
+  .nav_bar {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 34px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav_h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 34px;
+    margin-left: 10px;
+    left: 0px;
+    font-size: 30px;
+    color: #448899;
+    overflow: hidden;
+  }
+  .button_container {
+    display: flex;
+    margin-left: auto;
+    margin-right: 10px;
+    height: 34px;
+    font-size: 16px;
+    color: #666666;
+    align-items: center;
+    appearance: none;
+    border: none;
+  }
+  /* 消除按鈕的預設樣式 */
+  .button_container button {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 10px;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  /*  */
+  /* headline */
+  .headline {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    width: 94.44vw;
+    height: 27px;
+    /* position: absolute;
+    top: 94px; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .customer-name {
+    display: inline;
+  }
+
+  /* dialog */
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: flex;
+  }
+  dialog {
+    all: unset;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  .sign-in-block {
+    width: 340px;
+    min-height: 275px;
+
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+    box-sizing: border-box;
+  }
+
+  .decorator-bar {
+    width: 340px;
+    height: 10px;
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+  }
+  .close-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: 20px;
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .sign-in-form {
+    position: absolute;
+    width: 310px;
+    min-height: 235px;
+    top: 25px;
+    left: 15px;
+    box-sizing: border-box;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+  #signin-error-msg,
+  #signup-error-msg,
+  #signup-success-msg {
+    display: inline-block;
+  }
+  .sign-in-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signin-email,
+  #signin-password,
+  #signin-name,
+  #signup-name,
+  #signup-email,
+  #signup-password {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box; /* 解決內邊距跟邊框超過*/
+    padding-left: 15px;
+  }
+
+  #signin-email,
+  #signup-email {
+    margin-bottom: 10px;
+  }
+  #signin-password,
+  #signup-password {
+    margin-bottom: 10px;
+  }
+  .sign-in-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    /* position: absolute; */
+    top: 156px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .to-sign-up {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    top: 213px;
+    color: #666666;
+  }
+  /*  */
+
+  .sign-up-block {
+    width: 340px;
+    height: 332px;
+    top: 80px;
+    margin: 0 auto;
+    position: absolute;
+  }
+  .sign-up-form {
+    position: absolute;
+    width: 310px;
+    height: 292px;
+    top: 25px;
+    left: 15px;
+    text-align: center; /*對signin-error-msg inline-block水平置中*/
+  }
+
+  .sign-up-title {
+    color: #666666;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    line-height: 24px;
+    height: 27px;
+    overflow: hidden; /*解決文本的實際渲染高度超過設置的行高*/
+  }
+  #signup-name,
+  #signin-name {
+    margin-bottom: 10px;
+  }
+  .sign-up-btn {
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 310px;
+    height: 47px;
+    border-radius: 5px;
+    border: none;
+    background-color: #448899;
+    color: #fff;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .to-sign-in {
+    /* position: absolute; */
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background: none;
+    width: 310px;
+    height: 22px;
+    /* top: 270px; */
+    color: #666666;
+  }
+  /* ... */
+  /* 此為訂購資訊區塊 */
+
+  .first-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .first-picture {
+    height: 200px;
+    min-width: 340px;
+    width: 94.44vw;
+    /* background-color: #448899; */
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+  .journey-infor {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    min-width: 340px;
+    width: 94.44vw;
+    height: 200px;
+  }
+  .delete-icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    background-image: url("/static/icon/delete.png");
+  }
+  .journey-infor-tdt {
+    font-weight: 700;
+    color: #448899;
+    height: 24px;
+  }
+  .journey-infor-name {
+    display: inline; /*同一行*/
+  }
+  .journey-infor-date-block {
+    margin-top: 20px;
+    height: 24px;
+  }
+  .journey-infor-time-block,
+  .journey-infor-price-block,
+  .journey-infor-location-block {
+    margin-top: 10px;
+    height: 24px;
+  }
+  .money {
+    color: #666666;
+  }
+  .journey-infor-title {
+    font-weight: 700;
+    color: #666666;
+  }
+  .date,
+  .time,
+  .price,
+  .location {
+    color: #666666;
+  }
+  .section-divider-1 {
+    border: 1px solid #e8e8e8;
+    margin-top: 30px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-block {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 256px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-form-group-name {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .contact-form-group-email,
+  .contact-form-group-number {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .field-notice {
+    width: 94.44vw;
+    min-width: 340px;
+    height: 48px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #666666;
+  }
+  .contact-form-title {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .contact-form-group-name input,
+  .contact-form-group-email input,
+  .contact-form-group-number input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-2 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .payment {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 188px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .payment-info {
+    height: 24px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    line-height: 16px;
+  }
+  .card-number {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .expired-time,
+  .cvv {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+  }
+  .card-number input,
+  .expired-time input,
+  .cvv input {
+    width: 200px;
+    height: 38px; /* 设置输入框高度 */
+    font-size: 16px; /* 设置文字大小 */
+    padding-left: 10px;
+    /* 清除默认的padding */
+    box-sizing: border-box;
+    left: 10px;
+    color: #757575;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+  }
+
+  .section-divider-3 {
+    border: 1px solid #e8e8e8;
+    margin-top: 40px;
+    width: 94.44vw;
+    min-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .confirm-block {
+    min-width: 340px;
+    width: 94.44vw;
+    height: 100px;
+    margin-top: 40px;
+    position: relative;
+  }
+  .confirm-price {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 174px;
+    height: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13.3px;
+    color: #666666;
+    text-align: right; /*靠右對齊*/
+  }
+  .confirm-price-check {
+    display: inline;
+  }
+  .confirm-payment-Btn {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: #448899;
+    color: #ffffff;
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    width: 173px;
+    height: 36px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .empty-state {
+    width: 94.44vw;
+    min-width: 340px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 13.3px;
+    text-align: left;
+    color: #666666;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+  }
+  .footer {
+    /* 暫時解決跑版 */
+    position: sticky;
+    bottom: 0px;
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #757575;
+    height: 104px;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+  }
+}

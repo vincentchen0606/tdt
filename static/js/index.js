@@ -225,3 +225,46 @@ function renderAttractions(attractions) {
 }
 
 //點擊station-list該內容傳遞到searchAttractions以之為keyword
+
+//處理點擊　預定行程　判斷登入狀態與跳登入框
+document.addEventListener("DOMContentLoaded", () => {
+  const toBookingBtn = document.querySelector(".to-booking-btn");
+  const overlay = document.querySelector(".overlay");
+  const signInBlock = document.querySelector(".sign-in-block");
+
+  function showDialog(dialog) {
+    overlay.style.display = "flex";
+    dialog.style.display = "block";
+    dialog.setAttribute("open", "");
+  }
+  async function BookingBtn() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // 用戶未登入,顯示登入按鈕
+      showDialog(signInBlock);
+      console.log("hel");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/user/auth", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log("Received data from backend:", data);
+
+      if (data.data) {
+        // 用戶已登入,顯示登出按鈕
+        window.location.href = "/booking";
+        console.log("hee");
+      }
+    } catch (error) {
+      console.error("Error fetching user auth:", error);
+    }
+  }
+  toBookingBtn.addEventListener("click", () => {
+    BookingBtn();
+  });
+});
