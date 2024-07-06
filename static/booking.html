@@ -66,15 +66,15 @@
             <div class="contact-block-container">
               <div class="contact-form-group-name">
                 <label for="name">聯絡姓名：</label
-                ><input type="text" id="name" required />
+                ><input type="text" id="name" class="inputName" required />
               </div>
               <div class="contact-form-group-email">
                 <label for="email">連絡信箱：</label
-                ><input type="text" id="email" required />
+                ><input type="text" id="email" class="inputEmail" required />
               </div>
               <div class="contact-form-group-number">
                 <label for="number">手機號碼：</label
-                ><input type="text" id="number" required />
+                ><input type="text" id="number" class="inputPhone" required />
               </div>
             </div>
           </form>
@@ -89,21 +89,25 @@
           <p class="payment-info">信用卡付款資訊</p>
           <form action="" id="payment-form" class="payment-form" type="">
             <div class="card-number">
-              <label for="card-number">卡片號碼：</label
-              ><input
-                id="card-number"
-                type="text"
-                value="**** **** **** ****"
-                required
-              />
+              <label for="card-number">卡片號碼：</label>
+              <!-- <input
+                  id="card-number"
+                  type="text"
+                  value="**** **** **** ****"
+                  required
+                /> -->
+              <div class="tpfield" id="card-number"></div>
             </div>
+
             <div class="expired-time">
-              <label for="expired-time">過期時間：</label
-              ><input id="expired-time" type="text" value="MM/YY" required />
+              <label for="expired-time">過期時間：</label>
+              <!-- <input id="expired-time" type="text" value="MM/YY" required /> -->
+              <div class="tpfield" id="card-expiration-date"></div>
             </div>
             <div class="cvv">
-              <label for="CVV">驗證密碼：</label
-              ><input id="CVV" type="text" value="CVV" required />
+              <label for="CVV">驗證密碼：</label>
+              <!-- <input id="CVV" type="text" value="CVV" required /> -->
+              <div class="tpfield" id="card-ccv"></div>
             </div>
           </form>
         </div>
@@ -115,7 +119,10 @@
             總價：
             <p class="confirm-price-check">新台幣2000元</p>
           </div>
-          <button class="confirm-payment-Btn">確認訂購並付款</button>
+          <button class="confirm-payment-Btn" onclick="onClick()">
+            確認訂購並付款
+          </button>
+          <p class="orderMsg"></p>
         </div>
       </section>
     </main>
@@ -186,5 +193,69 @@
     <footer class="footer">COPYRIGHT © 2021 台北一日遊</footer>
     <script src="/static/js/auth.js"></script>
     <script src="/static/js/booking.js"></script>
+    <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.18.0"></script>
+    <script>
+      TPDirect.setupSDK(
+        151744,
+        "app_SBB60eBOb7uLhEgwwiF8ylfhW8qf7gXUH1BgciJprHHxA2ncYyp57Gru4S29",
+        "sandbox"
+      );
+      TPDirect.card.setup({
+        // Display ccv field
+        fields: {
+          number: {
+            // css selector
+            element: "#card-number",
+            placeholder: "**** **** **** ****",
+          },
+          expirationDate: {
+            // DOM object
+            element: document.getElementById("card-expiration-date"),
+            placeholder: "MM / YY",
+          },
+          ccv: {
+            element: "#card-ccv",
+            placeholder: "ccv",
+          },
+        },
+        styles: {
+          // Style all elements
+          input: {
+            color: "gray",
+          },
+          // Styling ccv field
+          "input.ccv": {
+            "font-size": "16px",
+          },
+          // Styling expiration-date field
+          "input.expiration-date": {
+            "font-size": "16px",
+          },
+          // Styling card-number field
+          "input.card-number": {
+            "font-size": "16px",
+          },
+          // style focus state
+          ":focus": {
+            color: "black",
+          },
+          // style valid state
+          ".valid": {
+            color: "green",
+          },
+          // style invalid state
+          ".invalid": {
+            color: "red",
+          },
+          // Media queries
+          // Note that these apply to the iframe, not the root window.
+          "@media screen and (max-width: 1920px)": {
+            input: {
+              color: "orange",
+            },
+          },
+        },
+      });
+    </script>
   </body>
 </html>

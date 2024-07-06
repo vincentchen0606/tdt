@@ -15,8 +15,14 @@ from fastapi.security import OAuth2PasswordBearer
 import jwt
 import json
 from pydantic import BaseModel
-
-
+#TapPay
+import requests
+from datetime import datetime
+# from dotenv import load_dotenv
+# load_dotenv()
+# import os
+# TAPPAY_PARTNER_KEY = os.environ.get("partner_BfHz8ecuRgVc7LCJ4oGUfULSChiPaa2iebMhdKr2qy4jMaHBeZV59RNu")
+# TAPPAY_MERCHANT_ID = os.environ.get("vincentchen0606_CTBC")
 # 
 #for static file
 from fastapi.staticfiles import StaticFiles
@@ -708,6 +714,137 @@ async def delete_booking(user_data: dict = Depends(get_current_user)):
     except Exception as e:
     # 處理異常情況，回傳符合規格的錯誤訊息
     	return {"error": True, "message": str(e)}
+
+
+#Order POST /api/orders　建立新的訂單，並完成付款程序
+class OrderCreate(BaseModel):
+    prime: str
+    order: dict
+
+@app.post("/api/orders")
+async def create_order(order: OrderCreate, current_user: dict = Depends(get_current_user)):
+    if not current_user:
+        raise HTTPException(status_code=403, detail="Not authenticated")
+    
+    try:
+        # 連接資料庫
+        db = connect(
+            host="127.0.0.1",
+            user="root",
+            password="abc123456",
+            database="taipei_attraction"
+        )
+        cursor = db.cursor()
+
+        # 生成訂單編號
+        order_number = datetime.now().strftime("%Y%m%d%H%M%S")
+
+        # 從請求中獲取訂單數據
+        order_data = order.order
+        price = order_data['price']
+        attraction_id = order_data['trip']['attraction']['id']
+        date = order_data['trip']['date']
+        time = order_data['trip']['time']
+        contact_name = order_data['contact']['name']
+        contact_email = order_data['contact']['email']
+        contact_phone = order_data['contact']['phone']
+
+        # 在資料庫中創建訂單記錄
+        insert_query = """
+        INSERT INTO orders 
+        (number, user_id, attractionId, date, time, price, contactName, contactEmail, phone, status)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(insert_query, (order_number, current_user['id'], attraction_id, date, time, price, contact_name, contact_email, contact_phone, 'unpaid'))
+        db.commit()
+
+        # 刪除購物車數據
+        cursor.execute("DELETE FROM bookings WHERE user_id = %s", (current_user['id'],))
+        db.commit()
+
+        # 準備 TapPay API 請求數據
+        tappay_data = {
+            "prime": order.prime,
+            "partner_key": "partner_BfHz8ecuRgVc7LCJ4oGUfULSChiPaa2iebMhdKr2qy4jMaHBeZV59RNu",
+            "merchant_id": "vincentchen0606_CTBC",
+            "details": "TapPay Test",
+            "amount": price,
+            "cardholder": {
+                "phone_number": contact_phone,
+                "name": contact_name,
+                "email": contact_email,
+            },
+            "remember": False
+        }
+        print(tappay_data)
+        # 發送請求到 TapPay
+        tappay_url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": "partner_BfHz8ecuRgVc7LCJ4oGUfULSChiPaa2iebMhdKr2qy4jMaHBeZV59RNu"
+        }
+
+        response = requests.post(tappay_url, json=tappay_data, headers=headers)
+        payment_result = response.json()
+        print(payment_result)
+        if payment_result.get("status") == 0:
+            # 付款成功
+            # print("執行前")
+            cursor.execute("UPDATE orders SET status = %s WHERE number = %s", ("paid", order_number))
+            # print("執行後")
+            db.commit()
+
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "data": {
+                        "number": order_number,
+                        "payment": {
+                            "status": 0,
+                            "message": "付款成功"
+                        }
+                    }
+                }
+            )
+        else:
+            # 付款失敗
+            return {
+                "data": {
+                    "number": order_number,
+                    "payment": {
+                        "status": 1,
+                        "message": "付款失敗"
+                    }
+                }
+            }
+
+    except Exception as e:
+        # 發生錯誤時回滾事務
+        if 'db' in locals():
+            db.rollback()
+        return JSONResponse(
+            status_code=500,
+            content={"error": True, "message": f"伺服器內部錯誤：{str(e)}"}
+        )
+
+    finally:
+        # 確保資料庫連接被關閉
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
+            db.close()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Static Pages (Never Modify Code in this Block)
