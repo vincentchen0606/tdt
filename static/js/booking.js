@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (data.data) {
         // 用戶已登入,導向booking
         window.location.href = "/booking";
-        console.log("hee");
+        console.log("test");
       }
     } catch (error) {
       console.error("Error fetching user auth:", error);
@@ -162,7 +162,8 @@ async function fetchAndRenderBookingData() {
 
     if (data.data) {
       const bookingData = data.data;
-      //   console.log(bookingData);
+      //會印出訂購相關資料
+      console.log(bookingData);
       renderBookingPage(bookingData);
     } else {
       renderNoBookingMessage();
@@ -234,4 +235,152 @@ async function deleteBooking() {
   } catch (error) {
     console.error("Error deleting booking:", error);
   }
+}
+
+// confirm-payment-Btn
+// 取得 TapPay Fields 狀態
+let inputName = document.querySelector(".inputName");
+let inputEmail = document.querySelector(".inputEmail");
+let inputPhone = document.querySelector(".inputPhone");
+let primeNum;
+let orderMsg = document.querySelector(".orderMsg");
+function onClick() {
+  // event.preventDefault()
+  // 取得 TapPay Fields 的 status
+  const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+
+  // 確認是否可以 getPrime
+  if (tappayStatus.canGetPrime === false) {
+    // alert('can not get prime')
+    orderMsg.innerText = "信用卡資訊有誤，請重新輸入";
+    orderMsg.style.fontSize = "14px";
+    return;
+  }
+
+  if (
+    inputName.value == "" ||
+    inputEmail.value == "" ||
+    inputPhone.value == ""
+  ) {
+    orderMsg.innerText = "請填寫所有欄位";
+    orderMsg.style.fontSize = "14px";
+    return;
+  }
+
+  orderMsg.setAttribute("style", "color:#448899");
+  orderMsg.innerText = "信用卡驗證中，請稍等";
+  orderMsg.style.fontSize = "14px";
+
+  // Get prime
+  TPDirect.card.getPrime((result) => {
+    if (result.status !== 0) {
+      console.log("get prime error " + result.msg);
+      return;
+    }
+    // 測試是否拿到prime
+    // alert("get prime 成功，prime: " + result.card.prime);
+    primeNum = result.card.prime;
+    fetchBookingDataAndOrder(primeNum);
+    // myOrder(primeNum);
+
+    // send prime to your server, to pay with Pay by Prime API .
+    // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+  });
+}
+
+async function fetchBookingDataAndOrder(prime) {
+  try {
+    const response = await fetch("/api/booking", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    const bookingData = await response.json();
+
+    if (bookingData.data) {
+      myOrder(prime, bookingData.data);
+    } else {
+      orderMsg.innerText = "無法獲取訂單訊息";
+      orderMsg.style.fontSize = "14px";
+    }
+  } catch (error) {
+    console.error("Error fetching booking data:", error);
+    orderMsg.innerText = "獲取訂單訊息時出錯";
+    orderMsg.style.fontSize = "14px";
+  }
+}
+
+//TapPay
+
+async function myOrder(prime, orderInfo) {
+  // 確保 orderInfo 存在
+  if (!orderInfo) {
+    orderMsg.innerText = "訂單缺少";
+    orderMsg.style.fontSize = "14px";
+    return;
+  }
+
+  let orderData = {
+    prime: prime,
+    order: {
+      price: orderInfo.price,
+      trip: {
+        attraction: {
+          id: orderInfo.attraction.id,
+          name: orderInfo.attraction.name,
+          address: orderInfo.attraction.address,
+          image: orderInfo.attraction.image,
+        },
+        date: orderInfo.date,
+        time: orderInfo.time,
+      },
+      contact: {
+        name: inputName.value,
+        email: inputEmail.value,
+        phone: inputPhone.value,
+      },
+    },
+  };
+
+  console.log(orderData);
+
+  try {
+    orderMsg.innerText = "正在處理訂單，請稍候...";
+    orderMsg.style.fontSize = "14px";
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const responseData = await response.json();
+
+    if (response.ok) {
+      console.log("訂單建立成功，包含付款狀態");
+      orderMsg.innerText = "訂單建立成功，系統將3秒後自動跳轉";
+      orderMsg.style.color = "green";
+      orderMsg.style.fontSize = "14px";
+      setTimeout(() => {
+        window.location.href = `/thankyou?number=${responseData.data.number}`;
+      }, 3000);
+    } else {
+      console.log("訂單建立失敗");
+      orderMsg.innerText = responseData.message || "訂單建立失敗，請稍後再試";
+      orderMsg.style.color = "red";
+      orderMsg.style.fontSize = "14px";
+    }
+  } catch (error) {
+    console.error("Error creating order:", error);
+    orderMsg.innerText = "發生錯誤，請稍後再試";
+    orderMsg.style.color = "red";
+    orderMsg.style.fontSize = "14px";
+  }
+}
+
+function thankyou(number) {
+  document.location.href = `/thankyou?number=${number}`;
 }

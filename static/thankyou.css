@@ -73,276 +73,6 @@
     font-size: inherit;
     color: inherit;
   }
-  /* headline */
-  .headline {
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    width: 1000px;
-    height: 27px;
-    /* position: absolute;
-    top: 94px; */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
-    box-sizing: border-box;
-    line-height: 16px; /*解決scroll bar*/
-  }
-  .customer-name {
-    display: inline;
-  }
-
-  .journey-block {
-    width: 980px;
-    height: 200px;
-    margin-top: 30px;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .first-picture {
-    width: 250px;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .first-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .journey-infor {
-    position: relative;
-    margin-left: 30px;
-    width: 700px;
-    height: 170px;
-  }
-  .delete-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    background-image: url("/static/icon/delete.png");
-  }
-  .journey-infor-tdt {
-    font-weight: 700;
-    color: #448899;
-    height: 24px;
-  }
-  .journey-infor-name {
-    display: inline; /*同一行*/
-  }
-  .journey-infor-date-block {
-    margin-top: 20px;
-    height: 24px;
-  }
-  .journey-infor-time-block,
-  .journey-infor-price-block,
-  .journey-infor-location-block {
-    margin-top: 10px;
-    height: 24px;
-  }
-  .money {
-    color: #666666;
-  }
-  .journey-infor-title {
-    font-weight: 700;
-    color: #666666;
-  }
-  .date,
-  .time,
-  .price,
-  .location {
-    color: #666666;
-  }
-
-  .section-divider-1 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .contact-block {
-    width: 980px;
-    height: 227px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .contact-form-group-name {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .contact-form-group-email,
-  .contact-form-group-number {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .field-notice {
-    height: 24px;
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #666666;
-  }
-  .contact-form-title {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .contact-form-group-name input,
-  .contact-form-group-email input,
-  .contact-form-group-number input {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-2 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 1200px;
-  }
-  .payment {
-    width: 980px;
-    height: 188px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  /*  */
-  .tpfield {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-  .payment-info {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .card-number {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .expired-time,
-  .cvv {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .card-number input,
-  .expired-time input,
-  .cvv input {
-    width: 200px;
-    height: 38px;
-    /* 设置输入框高度 */
-    font-size: 16px;
-    /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-3 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 1200px;
-  }
-  .confirm-block {
-    width: 980px;
-    height: 100px;
-    margin-top: 40px;
-    position: relative;
-  }
-  .confirm-price {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 174px;
-    height: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 13.3px;
-    color: #666666;
-    text-align: right; /*靠右對齊*/
-  }
-  .confirm-price-check {
-    display: inline;
-  }
-  .confirm-payment-Btn {
-    position: absolute;
-    right: 0;
-    top: 42px;
-    background: #448899;
-    color: #ffffff;
-    appearance: none;
-    border: none;
-    border-radius: 5px;
-    width: 173px;
-    height: 36px;
-    font-size: 16px;
-    text-align: center;
-  }
-  /* 刷卡訊息顯示 */
-  .orderMsg {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgb(185, 38, 38);
-  }
-  .empty-state {
-    width: 1000px;
-    height: 24px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 13.3px;
-    text-align: left;
-    color: #666666;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-  }
   /* dialog */
   .overlay {
     position: fixed;
@@ -544,7 +274,42 @@
     align-items: center;
     justify-content: center;
   }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  .main-content {
+    flex-grow: 1;
+  }
+  /* 訂單編號區塊 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .orderTitle1,
+  .orderTitle2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    height: 27px;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .orderTitle3,
+  .orderNumber {
+    color: #666666;
+  }
+
+  /*  */
 }
+
 @media (min-width: 750px) and (max-width: 1199px) {
   .main {
     padding-top: 54px; /* 與導航欄的高度相同 解決navigation position fixed問題*/
@@ -820,268 +585,6 @@
     color: #666666;
   }
   /* ... */
-  /* 此為訂購資訊區塊 */
-
-  .first-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .first-picture {
-    height: 200px;
-    min-width: 340px;
-    width: 94.44vw;
-    /* background-color: #448899; */
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-  }
-  .journey-infor {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    min-width: 340px;
-    width: 94.44vw;
-    height: 200px;
-  }
-  .delete-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    background-image: url("/static/icon/delete.png");
-  }
-  .journey-infor-tdt {
-    font-weight: 700;
-    color: #448899;
-    height: 24px;
-  }
-  .journey-infor-name {
-    display: inline; /*同一行*/
-  }
-  .journey-infor-date-block {
-    margin-top: 20px;
-    height: 24px;
-  }
-  .journey-infor-time-block,
-  .journey-infor-price-block,
-  .journey-infor-location-block {
-    margin-top: 10px;
-    height: 24px;
-  }
-  .money {
-    color: #666666;
-  }
-  .journey-infor-title {
-    font-weight: 700;
-    color: #666666;
-  }
-  .date,
-  .time,
-  .price,
-  .location {
-    color: #666666;
-  }
-  .section-divider-1 {
-    border: 1px solid #e8e8e8;
-    margin-top: 30px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .contact-block {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 256px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .contact-form-group-name {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .contact-form-group-email,
-  .contact-form-group-number {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .field-notice {
-    width: 94.44vw;
-    min-width: 340px;
-    height: 48px;
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #666666;
-  }
-  .contact-form-title {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .contact-form-group-name input,
-  .contact-form-group-email input,
-  .contact-form-group-number input {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-2 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .payment {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 188px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  /*  */
-  .tpfield {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-  .payment-info {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .card-number {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .expired-time,
-  .cvv {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .card-number input,
-  .expired-time input,
-  .cvv input {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-3 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .confirm-block {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 100px;
-    margin-top: 40px;
-    position: relative;
-  }
-  .confirm-price {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 174px;
-    height: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 13.3px;
-    color: #666666;
-    text-align: right; /*靠右對齊*/
-  }
-  .confirm-price-check {
-    display: inline;
-  }
-  .confirm-payment-Btn {
-    position: absolute;
-    right: 0;
-    top: 42px;
-    background: #448899;
-    color: #ffffff;
-    appearance: none;
-    border: none;
-    border-radius: 5px;
-    width: 173px;
-    height: 36px;
-    font-size: 16px;
-    text-align: center;
-  }
-  /* 刷卡訊息顯示 */
-  .orderMsg {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgb(185, 38, 38);
-  }
-  .empty-state {
-    width: 94.44vw;
-    min-width: 340px;
-    height: 24px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 13.3px;
-    text-align: left;
-    color: #666666;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-  }
   .footer {
     /* 暫時解決跑版 */
     position: sticky;
@@ -1096,6 +599,39 @@
     align-items: center;
     justify-content: center;
   }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  .main-content {
+    flex-grow: 1;
+  }
+  /* 訂單編號區塊 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Optional: Adds some space between elements */
+  }
+  .orderTitle1,
+  .orderTitle2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    height: 27px;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .orderTitle3,
+  .orderNumber {
+    color: #666666;
+  }
+  /*  */
 }
 
 @media (min-width: 360px) and (max-width: 750px) {
@@ -1175,7 +711,7 @@
     width: 94.44vw;
     height: 27px;
     /* position: absolute;
-    top: 94px; */
+        top: 94px; */
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -1373,268 +909,6 @@
     color: #666666;
   }
   /* ... */
-  /* 此為訂購資訊區塊 */
-
-  .first-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .first-picture {
-    height: 200px;
-    min-width: 340px;
-    width: 94.44vw;
-    /* background-color: #448899; */
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-  }
-  .journey-infor {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    min-width: 340px;
-    width: 94.44vw;
-    height: 200px;
-  }
-  .delete-icon {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    background-image: url("/static/icon/delete.png");
-  }
-  .journey-infor-tdt {
-    font-weight: 700;
-    color: #448899;
-    height: 24px;
-  }
-  .journey-infor-name {
-    display: inline; /*同一行*/
-  }
-  .journey-infor-date-block {
-    margin-top: 20px;
-    height: 24px;
-  }
-  .journey-infor-time-block,
-  .journey-infor-price-block,
-  .journey-infor-location-block {
-    margin-top: 10px;
-    height: 24px;
-  }
-  .money {
-    color: #666666;
-  }
-  .journey-infor-title {
-    font-weight: 700;
-    color: #666666;
-  }
-  .date,
-  .time,
-  .price,
-  .location {
-    color: #666666;
-  }
-  .section-divider-1 {
-    border: 1px solid #e8e8e8;
-    margin-top: 30px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .contact-block {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 256px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .contact-form-group-name {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .contact-form-group-email,
-  .contact-form-group-number {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-  }
-  .field-notice {
-    width: 94.44vw;
-    min-width: 340px;
-    height: 48px;
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #666666;
-  }
-  .contact-form-title {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .contact-form-group-name input,
-  .contact-form-group-email input,
-  .contact-form-group-number input {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-2 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .payment {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 188px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  /*  */
-  .tpfield {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-  .payment-info {
-    height: 24px;
-    font-size: 19px;
-    font-weight: 700;
-    color: #666666;
-    line-height: 16px;
-  }
-  .card-number {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .expired-time,
-  .cvv {
-    margin-top: 15px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    align-items: center;
-  }
-  .card-number input,
-  .expired-time input,
-  .cvv input {
-    width: 200px;
-    height: 38px; /* 设置输入框高度 */
-    font-size: 16px; /* 设置文字大小 */
-    padding-left: 10px;
-    /* 清除默认的padding */
-    box-sizing: border-box;
-    left: 10px;
-    color: #757575;
-    border: 1px solid #e8e8e8;
-    border-radius: 5px;
-  }
-
-  .section-divider-3 {
-    border: 1px solid #e8e8e8;
-    margin-top: 40px;
-    width: 94.44vw;
-    min-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .confirm-block {
-    min-width: 340px;
-    width: 94.44vw;
-    height: 100px;
-    margin-top: 40px;
-    position: relative;
-  }
-  .confirm-price {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 174px;
-    height: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 13.3px;
-    color: #666666;
-    text-align: right; /*靠右對齊*/
-  }
-  .confirm-price-check {
-    display: inline;
-  }
-  .confirm-payment-Btn {
-    position: absolute;
-    right: 0;
-    top: 42px;
-    background: #448899;
-    color: #ffffff;
-    appearance: none;
-    border: none;
-    border-radius: 5px;
-    width: 173px;
-    height: 36px;
-    font-size: 16px;
-    text-align: center;
-  }
-  /* 刷卡訊息顯示 */
-  .orderMsg {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    color: rgb(185, 38, 38);
-  }
-  .empty-state {
-    width: 94.44vw;
-    min-width: 340px;
-    height: 24px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 13.3px;
-    text-align: left;
-    color: #666666;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-  }
   .footer {
     /* 暫時解決跑版 */
     position: sticky;
@@ -1649,4 +923,37 @@
     align-items: center;
     justify-content: center;
   }
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  .main-content {
+    flex-grow: 1;
+  }
+  /* 訂單編號區塊 */
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Optional: Adds some space between elements */
+  }
+  .orderTitle1,
+  .orderTitle2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #666666;
+    height: 27px;
+    line-height: 16px; /*解決scroll bar*/
+  }
+  .orderTitle3,
+  .orderNumber {
+    color: #666666;
+  }
+  /*  */
 }
